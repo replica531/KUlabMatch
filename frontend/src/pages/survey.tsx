@@ -3,11 +3,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from 'react';
 import { useApiAgent } from '@/lib/api_agent';
 import { User } from '@/resources/types';
+import { useRouter } from 'next/router';
 
 export default function Survey() {
   const { isLoading, isAuthenticated } = useAuth0();
   const apiAgent = useApiAgent();
   const [user, setUser] = useState<User | null>(null)
+  const [survey, setSurveyName] = useState<any>([
+  const router = useRouter()
 
   const fetchUser = async () => {
     apiAgent({
@@ -20,8 +23,24 @@ export default function Survey() {
       })
   }
 
+  const fetchSurvey = async () => {
+    apiAgent({
+      url: `/api/survey`,
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json)
+      })
+  }
+
   useEffect(() => {
     fetchUser()
+
+    if (!user) {
+      router.push('/')
+    }
+    fetchSurvey()
   }, [])
 
   return (

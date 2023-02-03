@@ -28,6 +28,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:department, :field, :major)
+    params.require(:user).permit(:auth0_user_id, :affiliation, :grade, :gpa)
   end
 end

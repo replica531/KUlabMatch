@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_134704) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_185434) do
   create_table "laboratories", force: :cascade do |t|
+    t.string "university"
     t.string "department"
     t.string "field"
     t.string "major"
+    t.integer "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_laboratories_on_survey_id"
   end
 
   create_table "laboratory_users", force: :cascade do |t|
@@ -26,6 +29,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_134704) do
     t.datetime "updated_at", null: false
     t.index ["laboratory_id"], name: "index_laboratory_users_on_laboratory_id"
     t.index ["user_id"], name: "index_laboratory_users_on_user_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string "name"
+    t.string "position"
+    t.integer "laboratory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["laboratory_id"], name: "index_teachers_on_laboratory_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_134704) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "laboratories", "surveys"
   add_foreign_key "laboratory_users", "laboratories"
   add_foreign_key "laboratory_users", "users"
+  add_foreign_key "teachers", "laboratories"
 end
