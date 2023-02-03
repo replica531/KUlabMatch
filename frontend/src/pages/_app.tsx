@@ -12,6 +12,8 @@ export default function App({ Component, pageProps }: AppProps) {
       clientId={process.env["NEXT_PUBLIC_AUTH0_CLIENT_ID"]!}
       redirectUri={redirectUri}
       audience={process.env["NEXT_PUBLIC_AUTH0_AUDIENCE"]!}
+      cacheLocation='localstorage'
+      useRefreshTokens={true}
     >
       <Header />
       <Box minHeight={"95vh"} bgcolor="#edf2f7" pb={4}>
