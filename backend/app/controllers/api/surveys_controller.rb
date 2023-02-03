@@ -4,6 +4,7 @@ class Api::SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
+    @survey = Survey.find_by(name: params[:name])
   end
 
   def show

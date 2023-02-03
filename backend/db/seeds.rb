@@ -27,7 +27,7 @@ Teacher.create(name: '松尾 哲司', position: '教授')
 Teacher.create(name: '美舩 健', position: '講師')
 Teacher.create(name: '比留間 真悟', position: '助教')
 Laboratory.create(university: '京都大学', department: '大学院工学研究科', field: '電気工学専攻', major: '電磁エネルギー工学')
-#電子工学専攻
+# 電子工学専攻
 Teacher.create(name: '掛谷 一弘', position: '准教授')
 Teacher.create(name: '後藤 康仁', position: '准教授')
 Laboratory.create(university: '京都大学', department: '大学院工学研究科', field: '電子工学専攻', major: '集積機能工学')
@@ -96,7 +96,7 @@ Laboratory.create(university: '京都大学', department: '大学院情報学研
 Teacher.create(name: '今井 宏彦', position: '助教')
 Laboratory.create(university: '京都大学', department: '大学院情報学研究科', field: 'システム科学専攻', major: '医用工学')
 
-#大学院エネルギー科学研究科
+# 大学院エネルギー科学研究科
 Teacher.create(name: '下田 宏', position: '教授')
 Teacher.create(name: '石井 裕剛', position: '准教授')
 Teacher.create(name: '上田 樹美', position: '助教')
@@ -110,7 +110,7 @@ Teacher.create(name: '白井 康之', position: '教授')
 Teacher.create(name: '川山 巌', position: '准教授')
 Laboratory.create(university: '京都大学', department: '大学院エネルギー科学研究科', field: 'エネルギー基礎科学専攻', major: 'プロセスエネルギー学')
 
-#関連研究所/センター等
+# 関連研究所/センター等
 Teacher.create(name: '山本 衛', position: '教授')
 Teacher.create(name: '横山 竜宏', position: '准教授')
 Laboratory.create(university: '京都大学', department: '関連研究所/センター等', field: '生存圏研究所', major: 'リモートセンシング工学')
@@ -139,5 +139,3 @@ Laboratory.create(university: '京都大学', department: '関連研究所/セ�
 Teacher.create(name: '松田 一成', position: '教授')
 Teacher.create(name: '篠北 啓介', position: '助教')
 Laboratory.create(university: '京都大学', department: '関連研究所/センター等', field: 'エネルギー理工学研究所', major: 'エネルギー光物性')
-
-
