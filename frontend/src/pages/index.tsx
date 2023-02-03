@@ -1,9 +1,10 @@
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Home(props: any) {
+  const { isAuthenticated } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <>
       <Head>
@@ -12,6 +13,7 @@ export default function Home(props: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {isAuthenticated ? <p>ログイン中です</p> : <p>ログアウトしています</p>}
       {props.laboratories.map((laboratory: any) => {
         return (
           <div key={laboratory.id}>
