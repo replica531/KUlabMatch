@@ -29,3 +29,12 @@ group :test do
   gem 'selenium-webdriver', '4.2.0'
   gem 'webdrivers',         '5.0.0'
 end
+
+# 環境変数
+gem 'dotenv-rails', '2.7.6', groups: %i[development test]
+
+# Auth0
+gem 'jwt', '2.3.0'
+
+# API用
+gem 'rack-cors', '1.1.1'
