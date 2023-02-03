@@ -4,4 +4,3 @@ json.laboratories do
     json.partial! laboratory
   end
 end
-json.user_id @user_id

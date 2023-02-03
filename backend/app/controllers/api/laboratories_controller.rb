@@ -4,7 +4,6 @@ class Api::LaboratoriesController < ApplicationController
 
   def index
     @laboratories = Laboratory.all
-    @user_id = @auth0_user_id
   end
 
   def show; end

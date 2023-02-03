@@ -4,9 +4,9 @@ class Api::UsersController < ApplicationController
 
   def index
     @user = User.find_by(auth0_user_id: @auth0_user_id)
-    if @user.nil? && @auth0_user_id.present?
-      @user = User.create(auth0_user_id: @auth0_user_id)
-    end
+    return unless @user.nil? && @auth0_user_id.present?
+
+    @user = User.create(auth0_user_id: @auth0_user_id)
   end
 
   def update
@@ -28,6 +28,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:department, :field, :major)
+    params.require(:user).permit(:auth0_user_id, :affiliation, :grade, :gpa)
   end
 end
