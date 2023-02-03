@@ -68,3 +68,6 @@
 # typescript
 /frontend/*.tsbuildinfo
 /frontend/next-env.d.ts
+
+# environment variables
+/frontend/.env.*
