@@ -1,9 +1,28 @@
 import Head from 'next/head'
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from 'react';
+import { useApiAgent } from '@/lib/api_agent';
+import { Laboratory } from '@/resources/types';
 
-export default function Home(props: any) {
+export default function Home() {
   const { isAuthenticated } = useAuth0();
-  const { loginWithRedirect } = useAuth0();
+  const apiAgent = useApiAgent();
+  const [laboratories, setLaboratories] = useState<Laboratory[]>([])
+
+  const fetchLaboratories = async () => {
+    apiAgent({
+      url: `/api/laboratories`,
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setLaboratories(json.laboratories)
+      })
+  }
+
+  useEffect(() => {
+    fetchLaboratories()
+  }, [])
 
   return (
     <>
@@ -14,27 +33,13 @@ export default function Home(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {isAuthenticated ? <p>ログイン中です</p> : <p>ログアウトしています</p>}
-      {props.laboratories.map((laboratory: any) => {
+      {laboratories.map((laboratory: any) => {
         return (
           <div key={laboratory.id}>
-            <h1>{laboratory.name}</h1>
-            <p>{laboratory.teacher}</p>
+            <h1>{laboratory.department}</h1>
           </div>
         )
       })}
     </>
   )
-}
-
-export const getStaticProps = async () => {
-  // URLはlocalhostではなくapiとなる
-  const response = await fetch("http://localhost:3000/api/laboratories", {method: "GET"});
-  const json = await response.json();
-  console.log(json)
-
-  return {
-    props: {
-      laboratories: json
-    },
-  };
 }
