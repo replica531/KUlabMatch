@@ -1,5 +1,5 @@
 class LaboratoriesController < ApplicationController
-  before_action :set_laboratory, only: %i[ show update destroy ]
+  before_action :set_laboratory, only: %i[show update destroy]
 
   # GET /laboratories
   # GET /laboratories.json
@@ -9,8 +9,7 @@ class LaboratoriesController < ApplicationController
 
   # GET /laboratories/1
   # GET /laboratories/1.json
-  def show
-  end
+  def show; end
 
   # POST /laboratories
   # POST /laboratories.json
@@ -41,13 +40,14 @@ class LaboratoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_laboratory
-      @laboratory = Laboratory.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def laboratory_params
-      params.require(:laboratory).permit(:name, :teacher)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_laboratory
+    @laboratory = Laboratory.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def laboratory_params
+    params.require(:laboratory).permit(:name, :teacher)
+  end
 end
