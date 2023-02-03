@@ -28,6 +28,7 @@ export const getStaticProps = async () => {
   // URLはlocalhostではなくapiとなる
   const response = await fetch("http://localhost:3000/laboratories", {method: "GET"});
   const json = await response.json();
+  console.log(json)
 
   return {
     props: {

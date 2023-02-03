@@ -1,4 +1,4 @@
-class Api::LaboratoriesController < Api::Base
+class LaboratoriesController < ApplicationController
   before_action :set_laboratory, only: %i[ show update destroy ]
 
   # GET /laboratories
