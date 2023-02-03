@@ -28,7 +28,7 @@ export default function Home(props: any) {
 
 export const getStaticProps = async () => {
   // URLはlocalhostではなくapiとなる
-  const response = await fetch("http://localhost:3000/laboratories", {method: "GET"});
+  const response = await fetch("http://localhost:3000/api/laboratories", {method: "GET"});
   const json = await response.json();
   console.log(json)
 
