@@ -10,6 +10,7 @@ export interface User {
 export interface Survey {
   id: number;
   name: string;
+  max_request: number;
   laboratories: Laboratory[];
 }
 

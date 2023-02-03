@@ -5,6 +5,8 @@ import { useApiAgent } from '@/lib/api_agent';
 import { Laboratory, User } from '@/resources/types';
 import { useRouter } from 'next/router';
 import { Survey } from '@/resources/types';
+import { SurveyTable } from '@/components/survey/Table';
+import { Typography } from '@mui/material';
 
 export default function SurveyPage() {
   const { isLoading, isAuthenticated } = useAuth0();
@@ -13,6 +15,7 @@ export default function SurveyPage() {
   const [survey, setSurvey] = useState<Survey | null>(null)
   const [surveyName, setSurveyName] = useState<string>('京都大学電気電子工学科B3研究室配属')
   const [laboratories, setLaboratories] = useState<Laboratory[]>([])
+  const [isVoting, setIsVoting] = useState<boolean>(false)
   const router = useRouter()
 
   const fetchUser = async () => {
@@ -44,9 +47,6 @@ export default function SurveyPage() {
   useEffect(() => {
     fetchUser()
 
-    // if (!user) {
-    //   router.push('/')
-    // }
     fetchSurvey()
   }, [])
 
@@ -58,9 +58,8 @@ export default function SurveyPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {laboratories.map((laboratory) => {
-        {laboratory.university}
-      })}
+      <Typography variant="h5" align="center" sx={{py: 2}}>{survey ? survey.name : ""}</Typography>
+      {survey && <SurveyTable max_request={survey.max_request} laboratories={laboratories} />}
     </>
   )
 }
