@@ -6,6 +6,7 @@ export default {
   component: AuthButton,
   args: {
     onLogin: async () => void 0,
+    onLogout: async () => void 0,
   },
 } as ComponentMeta<typeof AuthButton>;
 

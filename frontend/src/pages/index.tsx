@@ -5,7 +5,7 @@ import { useApiAgent } from '@/lib/api_agent';
 import { Laboratory } from '@/resources/types';
 
 export default function Home() {
-  const { isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated } = useAuth0();
   const apiAgent = useApiAgent();
   const [laboratories, setLaboratories] = useState<Laboratory[]>([])
 
@@ -13,11 +13,15 @@ export default function Home() {
     apiAgent({
       url: `/api/laboratories`,
       method: 'GET',
+      outerMember: true,
     })
       .then((response) => response.json())
       .then((json) => {
         setLaboratories(json.laboratories)
       })
+  }
+  async function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   useEffect(() => {

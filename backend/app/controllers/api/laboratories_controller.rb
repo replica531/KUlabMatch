@@ -1,8 +1,10 @@
 class Api::LaboratoriesController < ApplicationController
   before_action :set_laboratory, only: %i[show update destroy]
+  before_action :authenticate_request!, only: %i[create update destroy]
 
   def index
     @laboratories = Laboratory.all
+    @user_id = @auth0_user_id
   end
 
   def show; end
