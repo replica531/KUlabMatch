@@ -4,3 +4,11 @@ export interface Laboratory {
   field: string;
   major: string;
 }
+
+export interface User {
+  id: number;
+  affiliation: string;
+  grade: number;
+  gpa: number;
+  admin: boolean;
+}
