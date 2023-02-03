@@ -2,12 +2,18 @@ import Head from 'next/head'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from 'react';
 import { useApiAgent } from '@/lib/api_agent';
-import { User } from '@/resources/types';
+import { Laboratory, User } from '@/resources/types';
+import { useRouter } from 'next/router';
+import { Survey } from '@/resources/types';
 
-export default function Survey() {
+export default function SurveyPage() {
   const { isLoading, isAuthenticated } = useAuth0();
   const apiAgent = useApiAgent();
   const [user, setUser] = useState<User | null>(null)
+  const [survey, setSurvey] = useState<Survey | null>(null)
+  const [surveyName, setSurveyName] = useState<string>('京都大学電気電子工学科B3研究室配属')
+  const [laboratories, setLaboratories] = useState<Laboratory[]>([])
+  const router = useRouter()
 
   const fetchUser = async () => {
     apiAgent({
@@ -20,8 +26,28 @@ export default function Survey() {
       })
   }
 
+  const fetchSurvey = async () => {
+    const data = {name: surveyName}
+    const query = new URLSearchParams(data).toString()
+    apiAgent({
+      url: `/api/surveys`,
+      method: 'GET',
+      data: query
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setSurvey(json.survey)
+        setLaboratories(json.laboratories)
+      })
+  }
+
   useEffect(() => {
     fetchUser()
+
+    // if (!user) {
+    //   router.push('/')
+    // }
+    fetchSurvey()
   }, [])
 
   return (
@@ -32,7 +58,9 @@ export default function Survey() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {user && user.affiliation}
+      {laboratories.map((laboratory) => {
+        {laboratory.university}
+      })}
     </>
   )
 }

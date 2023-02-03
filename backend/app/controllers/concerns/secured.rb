@@ -10,9 +10,9 @@ module Secured
   private
 
   def http_token
-    if request.headers['Authorization'].present?
-      request.headers['Authorization'].split(' ').last
-    end
+    return unless request.headers['Authorization'].present?
+
+    request.headers['Authorization'].split(' ').last
   end
 
   def auth_token

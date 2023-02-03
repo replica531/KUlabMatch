@@ -1,1 +1,1 @@
-json.extract! laboratory, :id, :affiliation, :grade, :gpa, :admin
+json.extract! user, :id, :affiliation, :grade, :gpa, :admin
