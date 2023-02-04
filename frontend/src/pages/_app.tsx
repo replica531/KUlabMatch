@@ -5,7 +5,7 @@ import Header from "@/components/nav/Header";
 import Box from '@mui/material/Box';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const redirectUri = `${process.env["NEXT_PUBLIC_BASE_URL"]}`;
+  const redirectUri = `${process.env["NEXT_PUBLIC_BASE_URL"]}/surveys`;
   return (
     <Auth0Provider
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN!}

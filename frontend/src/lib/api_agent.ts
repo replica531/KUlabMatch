@@ -35,7 +35,6 @@ export const useApiAgent = () => {
       const query = new URLSearchParams(params.data).toString();
       url += `?${query}`;
     }
-    console.log(url)
     const response = await fetch(url, {
       method: params.method,
       headers,

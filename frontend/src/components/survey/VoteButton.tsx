@@ -19,21 +19,27 @@ export const VoteButton = ({
   setIsVoting,
   selectedLabIds,
   votedLabIds,
-  setVotedLabIds,
 }: VoteButtonProps) => {
   const apiAgent = useApiAgent();
 
   const onVote = () => {
+    const destroyLabIds = votedLabIds.filter(
+      (v) => !selectedLabIds.some((s) => v.labId === s.labId && v.rank === s.rank)
+    )
+    const createLabIds = selectedLabIds.filter(
+      (s) => !votedLabIds.some((v) => v.labId === s.labId && v.rank === s.rank)
+    )
+    console.log(destroyLabIds)
+
     const data = {
-      votedLabIds: votedLabIds.map((votedLabId) => ({
-        user_id: userId,
-        laboratory_id: votedLabId.labId,
-        rank: votedLabId.rank,
+      user_id: userId,
+      destroyLabIds: destroyLabIds.map((destroyLabId) => ({
+        laboratory_id: destroyLabId.labId,
+        rank: destroyLabId.rank,
       })),
-      selectedLabIds: selectedLabIds.map((selectedLabId) => ({
-        user_id: userId,
-        laboratory_id: selectedLabId.labId,
-        rank: selectedLabId.rank,
+      createLabIds: createLabIds.map((createLabId) => ({
+        laboratory_id: createLabId.labId,
+        rank: createLabId.rank,
       })),
     };
     apiAgent({
@@ -43,7 +49,7 @@ export const VoteButton = ({
     })
       .then((response) => response.json())
       .then((json) => {
-        setVotedLabIds(json.votedLabIds);
+        location.reload()
       });
   };
 

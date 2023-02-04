@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
+import { LaboratoryUser } from "@/resources/types";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -16,6 +17,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export type VoteTableCellProps = {
   rank: number;
   labId: number;
+  users: LaboratoryUser[];
   isVoting: boolean;
   selectedLabIds: { rank: number; labId: number }[];
   setSelectedLabIds: React.Dispatch<
@@ -27,6 +29,7 @@ export type VoteTableCellProps = {
 export const VoteTableCell = ({
   rank,
   labId,
+  users,
   isVoting,
   selectedLabIds,
   setSelectedLabIds,
@@ -53,7 +56,7 @@ export const VoteTableCell = ({
 
   return (
     <StyledTableCell align="center" sx={{ ...(isVoted(rank, labId) && {backgroundColor: "#ffffe0"}) }}>
-      0
+      {users.length}
       {isVoting ? <Checkbox checked={isSelected(rank, labId)} onChange={onCheckBoxChange} /> : null}
     </StyledTableCell>
   );

@@ -31,8 +31,6 @@ export interface Teacher {
 }
 
 export interface LaboratoryUser {
-  id: number;
-  laboratory: Laboratory;
-  user: User;
   rank: number;
+  gpa: number;
 }
