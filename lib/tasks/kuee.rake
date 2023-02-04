@@ -1,7 +1,7 @@
 namespace :kuee do
   desc '京大電電研究室配属用のデータを作成する'
   task create_kuee_labs: :environment do
-    survey = Survey.create(name: '京都大学電気電子工学科B3研究室配属')
+    survey = Survey.create(name: '京都大学電気電子工学科B3研究室配属', max_request: 7)
     # 工学研究科
     # 電気工学専攻
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院工学研究科', field: '電気工学専攻',
