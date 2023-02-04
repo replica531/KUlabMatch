@@ -10,6 +10,7 @@ export interface User {
 export interface Survey {
   id: number;
   name: string;
+  max_request: number;
   laboratories: Laboratory[];
 }
 
@@ -30,8 +31,6 @@ export interface Teacher {
 }
 
 export interface LaboratoryUser {
-  id: number;
-  laboratory: Laboratory;
-  user: User;
   rank: number;
+  gpa: number;
 }
