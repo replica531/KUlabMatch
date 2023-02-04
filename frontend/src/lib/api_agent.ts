@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { devNull } from "os";
+import { serialize } from 'object-to-formdata';
 
 export const HOST =
   process.env.NEXT_PUBLIC_NODE_ENV === "development"
@@ -39,7 +39,7 @@ export const useApiAgent = () => {
     const response = await fetch(url, {
       method: params.method,
       headers,
-      body: params.method === "GET" ? null : params.data || {},
+      body: params.method === 'GET' ? null : serialize(params.data || {}),
     });
 
     return response
