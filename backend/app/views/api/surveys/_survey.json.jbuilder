@@ -1,1 +1,1 @@
-json.extract! survey, :id, :name
+json.extract! survey, :id, :name, :max_request
