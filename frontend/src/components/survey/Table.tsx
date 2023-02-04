@@ -11,6 +11,7 @@ import { Laboratory } from "@/resources/types";
 import Grid from "@mui/material/Grid";
 import { VoteTableCell } from "@/components/survey/VoteTableCell";
 import { Typography } from "@mui/material";
+import { truncate } from "fs";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -62,6 +63,7 @@ export const SurveyTable = ({
 }: SurveyTableProps) => {
   const labs_by_department = groupBy(laboratories, (lab) => lab.department);
   const departments = Object.keys(labs_by_department);
+
   return (
     <TableContainer component={Paper}>
       <Table stickyHeader sx={{ minWidth: 600 }} aria-label="customized table">
@@ -106,34 +108,38 @@ export const SurveyTable = ({
                 </Typography>
               </StyledTableCell>
             </StyledTableRow>
-            {labs_by_department[department].map((lab) => (
-              <StyledTableRow key={lab.id}>
-                <StyledTableCell align="left">{lab.field}</StyledTableCell>
-                <StyledTableCell align="left">{lab.major}</StyledTableCell>
-                <StyledTableCell align="left">
-                  <Grid container>
-                    {lab.teachers.map((teacher, i) => (
-                      <Grid key={i} item xs={12}>
-                        {teacher.position} : {teacher.name}
-                      </Grid>
-                    ))}
-                  </Grid>
-                </StyledTableCell>
-                {Array.from(Array(max_request).keys()).map((i) => (
-                  <VoteTableCell
-                    key={i}
-                    rank={i + 1}
-                    labId={lab.id}
-                    users={lab.users.filter((user) => user.rank === i + 1)}
-                    isVoting={isVoting}
-                    selectedLabIds={selectedLabIds}
-                    setSelectedLabIds={setSelectedLabIds}
-                    votedLabIds={votedLabIds}
-                  />
-                ))}
-                <StyledTableCell align="center">{lab.users.length}</StyledTableCell>
-              </StyledTableRow>
-            ))}
+            {labs_by_department[department]
+              .sort((a: Laboratory, b: Laboratory) => Number(a.field > b.field))
+              .map((lab) => (
+                <StyledTableRow key={lab.id}>
+                  <StyledTableCell align="left">{lab.field}</StyledTableCell>
+                  <StyledTableCell align="left">{lab.major}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    <Grid container>
+                      {lab.teachers.map((teacher, i) => (
+                        <Grid key={i} item xs={12}>
+                          {teacher.position} : {teacher.name}
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </StyledTableCell>
+                  {Array.from(Array(max_request).keys()).map((i) => (
+                    <VoteTableCell
+                      key={i}
+                      rank={i + 1}
+                      labId={lab.id}
+                      users={lab.users.filter((user) => user.rank === i + 1)}
+                      isVoting={isVoting}
+                      selectedLabIds={selectedLabIds}
+                      setSelectedLabIds={setSelectedLabIds}
+                      votedLabIds={votedLabIds}
+                    />
+                  ))}
+                  <StyledTableCell align="center">
+                    {lab.users.length}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         ))}
       </Table>
