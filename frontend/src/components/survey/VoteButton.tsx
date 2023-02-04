@@ -24,10 +24,10 @@ export const VoteButton = ({
 
   const onVote = () => {
     const destroyLabIds = votedLabIds.filter(
-      (v) => !selectedLabIds.some((s) => v.labId === s.labId && v.rank === s.rank)
+      (v) => !selectedLabIds.find((s) => v.labId === s.labId && v.rank === s.rank)
     )
     const createLabIds = selectedLabIds.filter(
-      (s) => !votedLabIds.some((v) => v.labId === s.labId && v.rank === s.rank)
+      (s) => !votedLabIds.find((v) => v.labId === s.labId && v.rank === s.rank)
     )
     console.log(destroyLabIds)
 
