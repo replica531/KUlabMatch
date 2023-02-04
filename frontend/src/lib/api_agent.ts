@@ -4,7 +4,7 @@ import { serialize } from 'object-to-formdata';
 export const HOST =
   process.env.NEXT_PUBLIC_NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "null";
+    : "https://ku-lab-match.herokuapp.com";
 
 export const useApiAgent = () => {
   const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
