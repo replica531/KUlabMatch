@@ -13,8 +13,8 @@ gem 'stimulus-rails',  '1.0.4'
 gem 'turbo-rails',     '1.1.1'
 
 group :development, :test do
-  gem 'sqlite3',         '1.6.0'
   gem 'debug', '1.6.1', platforms: %i[mri mingw x64_mingw]
+  gem 'sqlite3', '1.6.0'
 end
 
 group :development do

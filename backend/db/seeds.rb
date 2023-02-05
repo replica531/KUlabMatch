@@ -76,6 +76,8 @@ laboratory = survey.laboratories.create(university: '京都大学', department: 
                                         major: 'ナノプロセス工学')
 laboratory.teachers.create(name: 'Menaka De Zoysa', position: '講師')
 laboratory.teachers.create(name: '井上 卓也', position: '助教')
+laboratory = survey.laboratories.create(university: '京都大学', department: '大学院工学研究科', field: '光・電子理工学教育研究センター',
+                                        major: '先端電子材料')
 
 # 情報学研究科
 # 知能情報学専攻
