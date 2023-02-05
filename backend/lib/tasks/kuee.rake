@@ -79,6 +79,8 @@ namespace :kuee do
                                             major: 'ナノプロセス工学')
     laboratory.teachers.create(name: 'Menaka De Zoysa', position: '講師')
     laboratory.teachers.create(name: '井上 卓也', position: '助教')
+    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院工学研究科', field: '光・電子理工学教育研究センター',
+                                            major: '先端電子材料')
 
     # 情報学研究科
     # 知能情報学専攻
@@ -120,9 +122,9 @@ namespace :kuee do
                                             major: '論理生命学')
     laboratory.teachers.create(name: '石井 信', position: '教授')
     laboratory.teachers.create(name: '島﨑 秀昭', position: '准教授')
+    laboratory.teachers.create(name: '東 広志', position: '助教')
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: 'システム科学専攻',
                                             major: '医用工学')
-    laboratory.teachers.create(name: '東 広志', position: '助教')
     laboratory.teachers.create(name: '今井 宏彦', position: '助教')
 
     # 大学院エネルギー科学研究科
@@ -147,6 +149,9 @@ namespace :kuee do
     laboratory.teachers.create(name: '川山 巌', position: '准教授')
 
     # 関連研究所/センター等
+    # 産官学連携本部
+    laboratory = survey.laboratories.create(university: '京都大学', department: '関連研究所/センター等', field: '産官学連携本部',
+                                            major: 'ソフトウェアコンテンツ')
     # 生存圏研究所
     laboratory = survey.laboratories.create(university: '京都大学', department: '関連研究所/センター等', field: '生存圏研究所',
                                             major: 'リモートセンシング工学')
