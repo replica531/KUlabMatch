@@ -1,3 +1,5 @@
+export const initialSurveyName = "京都大学工学部電気電子工学科B3研究室配属"
+
 export const Grades = [
   { value: 0, label: 'その他' },
   { value: 1, label: 'B1' },
@@ -14,4 +16,10 @@ export const Grades = [
 export const Affiliations = [
   { value: 0, label: 'その他' },
   { value: 1, label: '京都大学工学部電気電子工学科' },
+]
+
+export const VotePermissionLists = [
+  {surveyName: '京都大学工学部電気電子工学科B3研究室配属', permissions: [
+    { affiliation: 1, grade: 3 },
+  ]}
 ]
