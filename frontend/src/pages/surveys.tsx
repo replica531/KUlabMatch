@@ -78,11 +78,14 @@ export default function SurveyPage() {
           {user && (
             <VoteButton
               userId={user.id}
+              surveyId={survey ? survey.id : 1}
               isVoting={isVoting}
               setIsVoting={setIsVoting}
               selectedLabIds={selectedLabIds}
               votedLabIds={votedLabIds}
               setVotedLabIds={setVotedLabIds}
+              laboratories={laboratories}
+              setLaboratories={setLaboratories}
             />
           )}
         </Grid>

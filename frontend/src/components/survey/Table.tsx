@@ -61,7 +61,7 @@ export const SurveyTable = ({
   setSelectedLabIds,
   votedLabIds,
 }: SurveyTableProps) => {
-  const labs_by_department = groupBy(laboratories, (lab) => lab.department);
+  const labs_by_department = laboratories ? groupBy(laboratories, (lab) => lab.department) : {};
   const departments = Object.keys(labs_by_department);
 
   return (
