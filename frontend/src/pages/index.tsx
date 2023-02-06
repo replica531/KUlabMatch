@@ -1,28 +1,26 @@
 import Head from 'next/head'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from 'react';
-import { useApiAgent } from '@/lib/api_agent';
+import { useApiAgent } from '@/utils/api_agent';
 import { Laboratory } from '@/resources/types';
-import { SurveyTable } from '@/components/survey/Table';
+import { SurveyTable } from '@/components/survey/SurveyTable';
 import { Survey } from '@/resources/types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
-import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
-
-export interface State extends SnackbarOrigin {
-  open: boolean;
-}
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { theme } from "@/styles/mui";
 
 export default function Home() {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const apiAgent = useApiAgent();
   const router = useRouter();
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] =
     useState<string>("京都大学電気電子工学科B3研究室配属");
   const [laboratories, setLaboratories] = useState<Laboratory[]>([])
+  const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
   const fetchSurvey = async () => {
     const data = { name: surveyName };
@@ -73,6 +71,7 @@ export default function Home() {
         max_request={7}
         laboratories={laboratories}
         isVoting={false}
+        matches={matches}
         selectedLabIds={[]}
         setSelectedLabIds={() => {}}
         votedLabIds={[]}

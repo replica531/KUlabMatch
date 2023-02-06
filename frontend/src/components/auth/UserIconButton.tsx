@@ -11,6 +11,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import Link from "@mui/material/Link";
+import Divider from '@mui/material/Divider';
 
 export type UserIconButtonProps = {
   isLoading: boolean;
@@ -74,7 +75,8 @@ export const UserIconButton = ({
             <Typography textAlign="center">投票ページ</Typography>
           </MenuItem>
         </Link>
-        <MenuItem onClick={() => onLogout()}>
+        <Divider />
+        <MenuItem onClick={() => onLogout()} sx={{ mt: 1 }}>
           <LogoutIcon />
           <Typography textAlign="center">ログアウト</Typography>
         </MenuItem>

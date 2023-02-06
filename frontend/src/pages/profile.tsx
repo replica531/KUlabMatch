@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useApiAgent } from "../lib/api_agent";
+import { useApiAgent } from "../utils/api_agent";
 import { useLayoutEffect, useState } from "react";
 import { User } from "../resources/types";
 import { Grades, Affiliations } from "../resources/constants";

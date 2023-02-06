@@ -14,7 +14,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-export type VoteTableCellProps = {
+export type SurveyTableVoteCellProps = {
   rank: number;
   labId: number;
   users: LaboratoryUser[];
@@ -26,7 +26,7 @@ export type VoteTableCellProps = {
   votedLabIds: { rank: number; labId: number }[];
 };
 
-export const VoteTableCell = ({
+export const SurveyTableVoteCell = ({
   rank,
   labId,
   users,
@@ -34,8 +34,7 @@ export const VoteTableCell = ({
   selectedLabIds,
   setSelectedLabIds,
   votedLabIds,
-}: VoteTableCellProps) => {
-
+}: SurveyTableVoteCellProps) => {
   const isVoted = (rank: number, labId: number) => {
     return votedLabIds.some((e) => e.rank === rank && e.labId === labId);
   };
@@ -50,14 +49,24 @@ export const VoteTableCell = ({
         selectedLabIds.filter((e) => e.rank !== rank || e.labId !== labId)
       );
     } else {
-      setSelectedLabIds([...selectedLabIds.filter((e) => e.rank !== rank && e.labId !== labId), { rank, labId }]);
+      setSelectedLabIds([
+        ...selectedLabIds.filter((e) => e.rank !== rank && e.labId !== labId),
+        { rank, labId },
+      ]);
     }
   };
 
   return (
-    <StyledTableCell align="center" sx={{ ...(isVoted(rank, labId) && {backgroundColor: "#ffffe0"}) }}>
+    <StyledTableCell
+      align="center"
+      sx={{ ...(isVoted(rank, labId) && { backgroundColor: "#ffffe0" }) }}
+    >
       {users.length}
-      {isVoting ? <Checkbox checked={isSelected(rank, labId)} onChange={onCheckBoxChange} /> : null}
+      <Checkbox
+        checked={isSelected(rank, labId)}
+        onChange={onCheckBoxChange}
+        sx={{ visibility: isVoting ? "visible" : "hidden" }}
+      />
     </StyledTableCell>
   );
 };
