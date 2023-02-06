@@ -9,14 +9,15 @@ import { SurveyTable } from "@/components/survey/Table";
 import { Typography } from "@mui/material";
 import { VoteButton } from "@/components/survey/VoteButton";
 import Grid from "@mui/material/Grid";
+import { initialSurveyName } from "@/resources/constants";
 
 export default function SurveyPage() {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading } = useAuth0();
   const apiAgent = useApiAgent();
   const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] =
-    useState<string>("京都大学工学部電気電子工学科B3研究室配属");
+    useState<string>(initialSurveyName);
   const [laboratories, setLaboratories] = useState<Laboratory[]>([]);
   const [isVoting, setIsVoting] = useState<boolean>(false);
   const [selectedLabIds, setSelectedLabIds] = useState<
@@ -84,7 +85,6 @@ export default function SurveyPage() {
               selectedLabIds={selectedLabIds}
               votedLabIds={votedLabIds}
               setVotedLabIds={setVotedLabIds}
-              laboratories={laboratories}
               setLaboratories={setLaboratories}
             />
           )}

@@ -18,7 +18,6 @@ export type VoteButtonProps = {
   setVotedLabIds: React.Dispatch<
     React.SetStateAction<{ rank: number; labId: number }[]>
   >;
-  laboratories: Laboratory[];
   setLaboratories: React.Dispatch<React.SetStateAction<Laboratory[]>>;
 };
 
@@ -30,7 +29,6 @@ export const VoteButton = ({
   selectedLabIds,
   votedLabIds,
   setVotedLabIds,
-  laboratories,
   setLaboratories,
 }: VoteButtonProps) => {
   const apiAgent = useApiAgent();
