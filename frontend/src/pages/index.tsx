@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
+import { initialSurveyName } from "@/resources/constants";
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
@@ -18,7 +19,7 @@ export default function Home() {
   const router = useRouter();
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] =
-    useState<string>("京都大学電気電子工学科B3研究室配属");
+    useState<string>(initialSurveyName);
   const [laboratories, setLaboratories] = useState<Laboratory[]>([])
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
