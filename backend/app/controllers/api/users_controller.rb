@@ -1,8 +1,8 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: %i[update destroy]
-  before_action :authenticate_request!, only: %i[index update destroy]
+  before_action :authenticate_request!, only: %i[new update destroy]
 
-  def index
+  def new
     @user = User.find_by(auth0_user_id: @auth0_user_id)
     return unless @user.nil? && @auth0_user_id.present?
 
@@ -10,11 +10,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      render :show, status: :ok, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    @user.update(user_params)
   end
 
   def destroy
@@ -28,6 +24,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:auth0_user_id, :affiliation, :grade, :gpa)
+    params.require(:user).permit(:affiliation, :grade, :gpa)
   end
 end

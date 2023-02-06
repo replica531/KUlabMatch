@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_203_185_434) do
+ActiveRecord::Schema[7.0].define(version: 20_230_206_103_043) do
   create_table 'laboratories', force: :cascade do |t|
     t.string 'university'
     t.string 'department'
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_203_185_434) do
   create_table 'users', force: :cascade do |t|
     t.string 'auth0_user_id', null: false
     t.integer 'affiliation', default: 0, null: false
-    t.integer 'grade'
+    t.integer 'grade', default: 0, null: false
     t.float 'gpa'
     t.boolean 'admin', default: false, null: false
     t.datetime 'created_at', null: false
