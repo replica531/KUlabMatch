@@ -76,8 +76,8 @@ laboratory = survey.laboratories.create(university: '京都大学', department: 
                                         major: 'ナノプロセス工学')
 laboratory.teachers.create(name: 'Menaka De Zoysa', position: '講師')
 laboratory.teachers.create(name: '井上 卓也', position: '助教')
-laboratory = survey.laboratories.create(university: '京都大学', department: '大学院工学研究科', field: '光・電子理工学教育研究センター',
-                                        major: '先端電子材料')
+survey.laboratories.create(university: '京都大学', department: '大学院工学研究科', field: '光・電子理工学教育研究センター',
+                           major: '先端電子材料')
 
 # 情報学研究科
 # 知能情報学専攻
@@ -146,6 +146,9 @@ laboratory.teachers.create(name: '白井 康之', position: '教授')
 laboratory.teachers.create(name: '川山 巌', position: '准教授')
 
 # 関連研究所/センター等
+# 産官学連携本部
+survey.laboratories.create(university: '京都大学', department: '関連研究所/センター等', field: '産官学連携本部',
+                           major: 'ソフトウェアコンテンツ')
 # 生存圏研究所
 laboratory = survey.laboratories.create(university: '京都大学', department: '関連研究所/センター等', field: '生存圏研究所',
                                         major: 'リモートセンシング工学')
