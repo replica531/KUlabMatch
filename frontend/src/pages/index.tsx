@@ -63,7 +63,7 @@ export default function Home() {
               variant="contained"
               sx={{ color: "#ffffff" }}
             >
-              投票ページへ
+              投票へ
             </Button>
           }
         </Grid>
