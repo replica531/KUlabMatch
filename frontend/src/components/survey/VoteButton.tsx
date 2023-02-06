@@ -1,10 +1,16 @@
 import { useApiAgent } from "@/lib/api_agent";
 import Button from "@mui/material/Button";
 import { Laboratory } from "@/resources/types";
+import { VotePermissionLists } from "@/resources/constants";
+import { User } from "@/resources/types";
+import { Survey } from "@/resources/types";
+import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import { Snackbar } from "@mui/material";
 
 export type VoteButtonProps = {
-  userId: number;
-  surveyId: number;
+  user: User;
+  survey: Survey | null;
   isVoting: boolean;
   setIsVoting: React.Dispatch<React.SetStateAction<boolean>>;
   selectedLabIds: { rank: number; labId: number }[];
@@ -17,8 +23,8 @@ export type VoteButtonProps = {
 };
 
 export const VoteButton = ({
-  userId,
-  surveyId,
+  user,
+  survey,
   isVoting,
   setIsVoting,
   selectedLabIds,
@@ -28,6 +34,15 @@ export const VoteButton = ({
   setLaboratories,
 }: VoteButtonProps) => {
   const apiAgent = useApiAgent();
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const onVote = () => {
     const destroyLabIds = votedLabIds.filter(
@@ -38,8 +53,8 @@ export const VoteButton = ({
     )
 
     const data = {
-      userId: userId,
-      surveyId: surveyId,
+      userId: user.id,
+      surveyId: survey?.id,
       destroyLabIds: destroyLabIds.map((destroyLabId) => ({
         laboratory_id: destroyLabId.labId,
         rank: destroyLabId.rank,
@@ -61,6 +76,16 @@ export const VoteButton = ({
       });
   };
 
+  const checkPermission = () => {
+    const permissions = VotePermissionLists.find((e) => e.surveyName === survey?.name)?.permissions
+    if (permissions && permissions.some((p) => p.affiliation === user.affiliation && p.grade === user.grade)){
+      setIsVoting(true);
+    }
+    else{
+      handleClick();
+    }
+  }
+
   if (isVoting) {
     return (
       <Button
@@ -76,12 +101,19 @@ export const VoteButton = ({
     );
   }
   return (
-    <Button
-      onClick={() => setIsVoting(true)}
-      variant="contained"
-      sx={{ color: "#ffffff" }}
-    >
-      選択する
-    </Button>
+    <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert severity="warning">あなたの所属、学年はこの調査の投票対象外です。プロフィールページで所属をご確認ください。</Alert>
+      </Snackbar>
+      <Button
+        onClick={
+          () => checkPermission()
+        }
+        variant="contained"
+        sx={{ color: "#ffffff" }}
+      >
+        選択する
+      </Button>
+    </>
   );
 };

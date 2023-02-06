@@ -8,7 +8,7 @@ import { useApiAgent } from "../lib/api_agent";
 import { useLayoutEffect, useState } from "react";
 import { User } from "../resources/types";
 import { Grades, Affiliations } from "../resources/constants";
-import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { forwardRef } from 'react';
 
@@ -32,11 +32,7 @@ export default function ProfilePage() {
     setOpen(true);
   };
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
+  const handleClose = () => {
     setOpen(false);
   };
 

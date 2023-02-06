@@ -16,7 +16,7 @@ export default function SurveyPage() {
   const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] =
-    useState<string>("京都大学電気電子工学科B3研究室配属");
+    useState<string>("京都大学工学部電気電子工学科B3研究室配属");
   const [laboratories, setLaboratories] = useState<Laboratory[]>([]);
   const [isVoting, setIsVoting] = useState<boolean>(false);
   const [selectedLabIds, setSelectedLabIds] = useState<
@@ -77,8 +77,8 @@ export default function SurveyPage() {
         <Grid item xs={2} sx={{ display: "flex", alignItems: "center" }}>
           {user && (
             <VoteButton
-              userId={user.id}
-              surveyId={survey ? survey.id : 1}
+              user={user}
+              survey={survey}
               isVoting={isVoting}
               setIsVoting={setIsVoting}
               selectedLabIds={selectedLabIds}
