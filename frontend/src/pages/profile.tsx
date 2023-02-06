@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Button, CardActions, MenuItem } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,6 +12,8 @@ import { Grades, Affiliations } from "../resources/constants";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { forwardRef } from 'react';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { theme } from "@/styles/mui";
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -27,6 +30,7 @@ export default function ProfilePage() {
   const [grade, setGrade] = useState<number | null>(null);
   const [gpa, setGpa] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
+  const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
   const handleClick = () => {
     setOpen(true);
@@ -75,9 +79,12 @@ export default function ProfilePage() {
   };
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>KUlabMatch | Profile</title>
+      </Head>
       <Typography
-        variant="h4"
+        variant={ matches ? "h4" : "h6" }
         align="center"
         component="div"
         py={4}
@@ -152,6 +159,6 @@ export default function ProfilePage() {
           正常に保存されました
         </Alert>
       </Snackbar>
-    </div>
+    </>
   );
 }

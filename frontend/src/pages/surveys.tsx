@@ -69,7 +69,7 @@ export default function SurveyPage() {
   return (
     <>
       <Head>
-        <title>KUlabMatch | survey</title>
+        <title>KUlabMatch | 投票ページ</title>
       </Head>
       <Grid container>
         <Grid item xs={9} md={11}>
