@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  affiliation: string;
+  affiliation: number;
   grade: number;
   gpa: number;
   admin: boolean;

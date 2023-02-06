@@ -6,14 +6,12 @@ export type AuthButtonProps = {
   isLoading: boolean;
   isAuthenticated: boolean;
   onLogin: (options?: RedirectLoginOptions) => Promise<void>;
-  onLogout: () => void;
 };
 
 export const AuthButton = ({
   isLoading,
   isAuthenticated,
   onLogin,
-  onLogout,
 }: AuthButtonProps) => {
   if (isLoading) {
     return (
@@ -36,13 +34,5 @@ export const AuthButton = ({
       </Button>
     );
   }
-  return (
-    <Button
-      onClick={() => onLogout()}
-      variant="contained"
-      sx={{ color: "#ffffff" }}
-    >
-      ログアウト
-    </Button>
-  );
+  return <></>;
 };

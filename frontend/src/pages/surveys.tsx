@@ -28,7 +28,7 @@ export default function SurveyPage() {
 
   const fetchUser = async () => {
     apiAgent({
-      url: `/api/users`,
+      url: `/api/users/new`,
       method: "GET",
     })
       .then((response) => response.json())

@@ -9,6 +9,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+
+export interface State extends SnackbarOrigin {
+  open: boolean;
+}
 
 export default function Home() {
   const { isLoading, isAuthenticated } = useAuth0();

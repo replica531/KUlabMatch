@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import ScienceIcon from '@mui/icons-material/Science';
 import { AuthButton } from "@/components/auth/AuthButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import { UserIconButton } from "@/components/auth/UserIconButton";
 
 export default function Header() {
   const auth0 = useAuth0();
@@ -24,12 +25,20 @@ export default function Header() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             研究室希望調査
           </Typography>
-          <AuthButton
-            isAuthenticated={auth0.isAuthenticated}
-            isLoading={auth0.isLoading}
-            onLogin={() => auth0.loginWithRedirect()}
-            onLogout={() => auth0.logout()}
-          />
+          {auth0.isAuthenticated && !auth0.isLoading ? (
+            <UserIconButton
+              isAuthenticated={auth0.isAuthenticated}
+              isLoading={auth0.isLoading}
+              imageUrl={"https://picsum.photos/300/200"}
+              onLogout={() => auth0.logout()}
+            />
+          ) : (
+            <AuthButton
+              isAuthenticated={auth0.isAuthenticated}
+              isLoading={auth0.isLoading}
+              onLogin={() => auth0.loginWithRedirect()}
+            />
+          )}
         </Toolbar>
       </AppBar>
     </Box>
