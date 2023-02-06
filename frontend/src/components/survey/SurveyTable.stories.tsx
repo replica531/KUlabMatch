@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { SurveyTable } from "./Table";
+import { SurveyTable } from "./SurveyTable";
 
 export default {
   component: SurveyTable

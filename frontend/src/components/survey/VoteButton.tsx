@@ -1,4 +1,4 @@
-import { useApiAgent } from "@/lib/api_agent";
+import { useApiAgent } from "@/utils/api_agent";
 import Button from "@mui/material/Button";
 import { Laboratory } from "@/resources/types";
 import { VotePermissionLists } from "@/resources/constants";

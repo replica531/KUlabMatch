@@ -7,13 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { Laboratory } from "@/resources/types";
-import Grid from "@mui/material/Grid";
-import { VoteTableCell } from "@/components/survey/VoteTableCell";
-import { Typography } from "@mui/material";
-import { truncate } from "fs";
+import { SurveyTableLabRow } from "@/components/survey/SurveyTableLabRow";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -23,8 +21,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(even)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
@@ -33,10 +31,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+  arr.reduce((groups, item) => {
+    (groups[key(item)] ||= []).push(item);
+    return groups;
+  }, {} as Record<K, T[]>);
+
 export type SurveyTableProps = {
   max_request: number;
   laboratories: Laboratory[];
   isVoting: boolean;
+  matches: boolean;
   selectedLabIds: { rank: number; labId: number }[];
   setSelectedLabIds: React.Dispatch<
     React.SetStateAction<{ rank: number; labId: number }[]>
@@ -47,40 +52,44 @@ export type SurveyTableProps = {
   >;
 };
 
-export const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  arr.reduce((groups, item) => {
-    (groups[key(item)] ||= []).push(item);
-    return groups;
-  }, {} as Record<K, T[]>);
-
 export const SurveyTable = ({
   max_request,
   laboratories,
   isVoting,
+  matches,
   selectedLabIds,
   setSelectedLabIds,
   votedLabIds,
 }: SurveyTableProps) => {
-  const labs_by_department = laboratories ? groupBy(laboratories, (lab) => lab.department) : {};
+  const labs_by_department = laboratories
+    ? groupBy(laboratories, (lab) => lab.department)
+    : {};
   const departments = Object.keys(labs_by_department);
+
 
   return (
     <TableContainer component={Paper}>
-      <Table stickyHeader sx={{ minWidth: 600 }} aria-label="customized table">
+      <Table stickyHeader sx={{ minWidth: 400 }}>
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center" colSpan={3}>
-              研究室
-            </StyledTableCell>
+            {matches && (
+              <StyledTableCell align="center" colSpan={3}>
+                研究室
+              </StyledTableCell>
+            )}
             <StyledTableCell align="center" colSpan={max_request}>
               希望順位
             </StyledTableCell>
             <StyledTableCell></StyledTableCell>
           </TableRow>
           <TableRow>
-            <StyledTableCell align="left">専攻</StyledTableCell>
-            <StyledTableCell align="left">分野</StyledTableCell>
-            <StyledTableCell align="left">教員</StyledTableCell>
+            {matches && (
+              <>
+                <StyledTableCell align="left">専攻</StyledTableCell>
+                <StyledTableCell align="left">分野</StyledTableCell>
+                <StyledTableCell align="left">教員</StyledTableCell>
+              </>
+            )}
             {Array.from(Array(max_request).keys()).map((i) => (
               <StyledTableCell key={i} align="center">
                 {i + 1}
@@ -95,7 +104,7 @@ export const SurveyTable = ({
               <StyledTableCell
                 component="th"
                 scope="row"
-                colSpan={4 + max_request}
+                colSpan={matches ? max_request + 4 : max_request + 1}
                 sx={{ backgroundColor: "#a9a9a9" }}
               >
                 <Typography
@@ -110,35 +119,17 @@ export const SurveyTable = ({
             </StyledTableRow>
             {labs_by_department[department]
               .sort((a: Laboratory, b: Laboratory) => Number(a.field > b.field))
-              .map((lab) => (
-                <StyledTableRow key={lab.id}>
-                  <StyledTableCell align="left">{lab.field}</StyledTableCell>
-                  <StyledTableCell align="left">{lab.major}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    <Grid container>
-                      {lab.teachers.map((teacher, i) => (
-                        <Grid key={i} item xs={12}>
-                          {teacher.position} : {teacher.name}
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </StyledTableCell>
-                  {Array.from(Array(max_request).keys()).map((i) => (
-                    <VoteTableCell
-                      key={i}
-                      rank={i + 1}
-                      labId={lab.id}
-                      users={lab.users.filter((user) => user.rank === i + 1)}
-                      isVoting={isVoting}
-                      selectedLabIds={selectedLabIds}
-                      setSelectedLabIds={setSelectedLabIds}
-                      votedLabIds={votedLabIds}
-                    />
-                  ))}
-                  <StyledTableCell align="center">
-                    {lab.users.length}
-                  </StyledTableCell>
-                </StyledTableRow>
+              .map((laboratory) => (
+                <SurveyTableLabRow
+                  key={laboratory.id}
+                  max_request={max_request}
+                  laboratory={laboratory}
+                  isVoting={isVoting}
+                  matches={matches}
+                  selectedLabIds={selectedLabIds}
+                  setSelectedLabIds={setSelectedLabIds}
+                  votedLabIds={votedLabIds}
+                />
               ))}
           </TableBody>
         ))}
