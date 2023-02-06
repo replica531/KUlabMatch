@@ -1,9 +1,10 @@
 import { useApiAgent } from "@/lib/api_agent";
-import { useState } from "react";
 import Button from "@mui/material/Button";
+import { Laboratory } from "@/resources/types";
 
 export type VoteButtonProps = {
   userId: number;
+  surveyId: number;
   isVoting: boolean;
   setIsVoting: React.Dispatch<React.SetStateAction<boolean>>;
   selectedLabIds: { rank: number; labId: number }[];
@@ -11,14 +12,20 @@ export type VoteButtonProps = {
   setVotedLabIds: React.Dispatch<
     React.SetStateAction<{ rank: number; labId: number }[]>
   >;
+  laboratories: Laboratory[];
+  setLaboratories: React.Dispatch<React.SetStateAction<Laboratory[]>>;
 };
 
 export const VoteButton = ({
   userId,
+  surveyId,
   isVoting,
   setIsVoting,
   selectedLabIds,
   votedLabIds,
+  setVotedLabIds,
+  laboratories,
+  setLaboratories,
 }: VoteButtonProps) => {
   const apiAgent = useApiAgent();
 
@@ -29,10 +36,10 @@ export const VoteButton = ({
     const createLabIds = selectedLabIds.filter(
       (s) => !votedLabIds.find((v) => v.labId === s.labId && v.rank === s.rank)
     )
-    console.log(destroyLabIds)
 
     const data = {
-      user_id: userId,
+      userId: userId,
+      surveyId: surveyId,
       destroyLabIds: destroyLabIds.map((destroyLabId) => ({
         laboratory_id: destroyLabId.labId,
         rank: destroyLabId.rank,
@@ -49,7 +56,8 @@ export const VoteButton = ({
     })
       .then((response) => response.json())
       .then((json) => {
-        location.reload()
+        setVotedLabIds(json.votedLabIds);
+        setLaboratories(json.laboratories);
       });
   };
 

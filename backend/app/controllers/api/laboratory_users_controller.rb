@@ -1,6 +1,7 @@
 class Api::LaboratoryUsersController < ApplicationController
   before_action :set_laboratory_user, only: %i[destroy]
   before_action :set_current_user, only: %i[create destroy]
+  before_action :set_survey, only: %i[create]
   before_action :authenticate_request!, only: %i[create destroy]
 
   def create
@@ -24,8 +25,13 @@ class Api::LaboratoryUsersController < ApplicationController
   end
 
   def set_current_user
-    user_id = params.require(:user_id)
+    user_id = params.require(:userId)
     @user = User.find_by(id: user_id)
+  end
+
+  def set_survey
+    survey_id = params.require(:surveyId)
+    @survey = Survey.find(survey_id)
   end
 
   def destroy_laboratory_user_params
