@@ -49,12 +49,12 @@ export default function Home() {
         <title>KUlabMatch | HOME</title>
       </Head>
       <Grid container>
-        <Grid item xs={10}>
-          <Typography variant="h4" align="center" sx={{ py: 2 }}>
-            {survey && survey.name}
+        <Grid item xs={9} md={11}>
+          <Typography variant={ matches ? "h4" : "h6" } align="center" sx={{ p: 1 }}>
+            {survey ? survey.name : ""}
           </Typography>
         </Grid>
-        <Grid item xs={2} sx={{ display: "flex", alignItems: "center" }}>
+        <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
           {isAuthenticated &&
             <Button
               onClick={() => {
