@@ -3,22 +3,15 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import { LaboratoryUser } from "@/resources/types";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+import { StyledTableCell } from "@/components/survey/SurveyTable";
 
 export type SurveyTableVoteCellProps = {
   rank: number;
   labId: number;
   users: LaboratoryUser[];
   isVoting: boolean;
+  matches: boolean;
+  max_request: number;
   selectedLabIds: { rank: number; labId: number }[];
   setSelectedLabIds: React.Dispatch<
     React.SetStateAction<{ rank: number; labId: number }[]>
@@ -31,6 +24,8 @@ export const SurveyTableVoteCell = ({
   labId,
   users,
   isVoting,
+  matches,
+  max_request,
   selectedLabIds,
   setSelectedLabIds,
   votedLabIds,
@@ -59,7 +54,8 @@ export const SurveyTableVoteCell = ({
   return (
     <StyledTableCell
       align="center"
-      sx={{ ...(isVoted(rank, labId) && { backgroundColor: "#ffffe0" }) }}
+      sx={{ ...(isVoted(rank, labId) && { backgroundColor: "#ffffe0" })}}
+      width={100 / (max_request + (matches ? 7 : 1)) + "%"}
     >
       {users.length}
       <br />

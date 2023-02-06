@@ -53,6 +53,8 @@ export const SurveyTableLabRow = ({
               labId={laboratory.id}
               users={laboratory.users.filter((user) => user.rank === i + 1)}
               isVoting={isVoting}
+              matches={matches}
+              max_request={max_request}
               selectedLabIds={selectedLabIds}
               setSelectedLabIds={setSelectedLabIds}
               votedLabIds={votedLabIds}
@@ -85,6 +87,8 @@ export const SurveyTableLabRow = ({
                 labId={laboratory.id}
                 users={laboratory.users.filter((user) => user.rank === i + 1)}
                 isVoting={isVoting}
+                matches={matches}
+                max_request={max_request}
                 selectedLabIds={selectedLabIds}
                 setSelectedLabIds={setSelectedLabIds}
                 votedLabIds={votedLabIds}
