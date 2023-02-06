@@ -62,6 +62,7 @@ export const SurveyTableVoteCell = ({
       sx={{ ...(isVoted(rank, labId) && { backgroundColor: "#ffffe0" }) }}
     >
       {users.length}
+      <br />
       <Checkbox
         checked={isSelected(rank, labId)}
         onChange={onCheckBoxChange}

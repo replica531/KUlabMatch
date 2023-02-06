@@ -69,7 +69,7 @@ export const SurveyTable = ({
 
   return (
     <TableContainer component={Paper}>
-      <Table stickyHeader sx={{ minWidth: 400 }}>
+      <Table stickyHeader size="small"  padding={ matches ? "normal" : "none" } sx={{ minWidth: 400 }}>
         <TableHead>
           <TableRow>
             {matches && (
