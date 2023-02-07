@@ -109,7 +109,7 @@ namespace :kuee do
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信システム専攻',
                                             major: '情報回路方式')
     laboratory.teachers.create(name: '佐藤 高史', position: '教授')
-    laboratory.teachers.create(name: '粟野 俊', position: '准教授')
+    laboratory.teachers.create(name: '粟野 皓光', position: '准教授')
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信システム専攻',
                                             major: '大規模集積回路')
     laboratory.teachers.create(name: '新津 葵一', position: '教授')
@@ -141,7 +141,7 @@ namespace :kuee do
     laboratory.teachers.create(name: '石澤 明宏', position: '准教授')
     # エネルギ-応用科学専攻
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院エネルギー科学研究科', field: 'エネルギー応用科学専攻',
-                                            major: 'エネルギー材料学')
+                                            major: 'エネルギー応用基礎学')
     laboratory.teachers.create(name: '土井 俊哉', position: '教授')
     laboratory = survey.laboratories.create(university: '京都大学', department: '大学院エネルギー科学研究科', field: 'エネルギー応用科学専攻',
                                             major: 'プロセスエネルギー学')
