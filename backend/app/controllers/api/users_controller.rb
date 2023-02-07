@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(auth0_user_id: @auth0_user_id)
     return unless @user.nil? && @auth0_user_id.present?
 
-    @user = User.create(auth0_user_id: @auth0_user_id)
+    @user = User.create(auth0_user_id: @auth0_user_id, affiliation: 0, grade: 0, admin: false)
   end
 
   def update
