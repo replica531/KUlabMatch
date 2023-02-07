@@ -106,14 +106,14 @@ namespace :kuee do
                                             major: '知的通信網')
     laboratory.teachers.create(name: '大木 英司', position: '教授')
     laboratory.teachers.create(name: '佐藤 丈博', position: '准教授')
-    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信システム専攻',
+    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信情報システム専攻',
                                             major: '情報回路方式')
     laboratory.teachers.create(name: '佐藤 高史', position: '教授')
     laboratory.teachers.create(name: '粟野 皓光', position: '准教授')
-    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信システム専攻',
+    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信情報システム専攻',
                                             major: '大規模集積回路')
     laboratory.teachers.create(name: '新津 葵一', position: '教授')
-    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信システム専攻',
+    laboratory = survey.laboratories.create(university: '京都大学', department: '大学院情報学研究科', field: '通信情報システム専攻',
                                             major: '超高速信号処理')
     laboratory.teachers.create(name: '橋本 昌宜', position: '教授')
     laboratory.teachers.create(name: '白井 僚', position: '助教')
