@@ -1,5 +1,10 @@
 export const initialSurveyName = "京都大学工学部電気電子工学科B3研究室配属"
 
+export const HOST =
+  process.env.NEXT_PUBLIC_NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://ku-lab-match.herokuapp.com";
+
 export const Grades = [
   { value: 0, label: 'その他' },
   { value: 1, label: 'B1' },
