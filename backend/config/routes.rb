@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     resources :laboratory_users, only: %i[create destroy]
   end
 
-  get 'csrf/', to: 'csrf#show'
+  resource :csrf, only: %i[show]
 end
