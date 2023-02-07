@@ -5,4 +5,8 @@ class CsrfsController < ApplicationController
       status: :ok
     }
   end
+
+  private
+
+  def form_authenticity_token; end
 end
