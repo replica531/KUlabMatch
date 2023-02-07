@@ -1,10 +1,20 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { serialize } from 'object-to-formdata';
+import { HOST } from '@/resources/constants';
 
-export const HOST =
-  process.env.NEXT_PUBLIC_NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://ku-lab-match.herokuapp.com";
+interface CsrfData {
+  token: string;
+  status: string;
+}
+
+const getToken = async (): Promise<CsrfData> => {
+  const url = HOST + "/csrf/"
+  const response = await fetch(url, {
+    credentials: "include"
+  })
+
+  return response.json()
+}
 
 export const useApiAgent = () => {
   const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
@@ -16,6 +26,8 @@ export const useApiAgent = () => {
     outerMember?: boolean;
   }) => {
     const headers = new Headers()
+    const csrfData = await getToken()
+    headers.append('X-CSRF-Token', csrfData.token)
     let token = ''
     try { // Login直後まだLoading中だとここでエラーが出る
       token = params.outerMember ? '' : await getAccessTokenSilently()
@@ -39,6 +51,7 @@ export const useApiAgent = () => {
       method: params.method,
       headers,
       body: params.method === 'GET' ? null : serialize(params.data || {}),
+      credentials: "include",
     });
 
     return response
