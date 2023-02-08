@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import Box from "@mui/material/Box";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,7 @@ ChartJS.register(
 );
 export const options = {
   responsive: true,
+  maintainAspectRatio : false,
   scales: {
     x: {
       stacked: true,
@@ -93,8 +95,8 @@ export const GpaGraph = ({ gpas, max_request }: GpaGraphProps) => {
   };
 
   return (
-    <>
+    <Box height="80vh">
       <Bar options={options} data={data} />
-    </>
+    </Box>
   );
 };
