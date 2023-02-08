@@ -27,6 +27,7 @@ export default function SurveyPage() {
   const [votedLabIds, setVotedLabIds] = useState<
     { rank: number; labId: number }[]
   >([]);
+  const [voterCount, setVoterCount] = useState<number>(0);
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
   const fetchUser = async () => {
@@ -54,7 +55,16 @@ export default function SurveyPage() {
       .then((json) => {
         setSurvey(json.survey);
         setLaboratories(json.laboratories);
+        calculateVoterCount(json.laboratories);
       });
+  };
+
+  const calculateVoterCount = (laboratories: Laboratory[]) => {
+    let count = 0;
+    laboratories.forEach((lab) => {
+      count += lab.users.filter((user) => user.rank == 1).length;
+    });
+    setVoterCount(count);
   };
 
   useEffect(() => {
@@ -74,7 +84,7 @@ export default function SurveyPage() {
       <Grid container>
         <Grid item xs={9} md={11}>
           <Typography variant={ matches ? "h4" : "h6" } align="center" sx={{ p: 1 }}>
-            {survey ? survey.name : ""}
+            {survey ? survey.name : ""}(投票者数: {voterCount})
           </Typography>
         </Grid>
         <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
