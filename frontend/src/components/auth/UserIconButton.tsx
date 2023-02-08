@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import Link from "@mui/material/Link";
@@ -44,7 +44,7 @@ export const UserIconButton = ({
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <FormatListBulletedIcon fontSize="large"/>
+          <MenuIcon fontSize="large"/>
         </IconButton>
       </Tooltip>
       <Menu

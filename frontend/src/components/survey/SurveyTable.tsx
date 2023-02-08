@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Laboratory } from "@/resources/types";
 import { SurveyTableLabRow } from "@/components/survey/SurveyTableLabRow";
+import { groupBy } from "@/utils/functions";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,12 +31,6 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  arr.reduce((groups, item) => {
-    (groups[key(item)] ||= []).push(item);
-    return groups;
-  }, {} as Record<K, T[]>);
 
 export type SurveyTableProps = {
   max_request: number;
@@ -66,14 +61,13 @@ export const SurveyTable = ({
     : {};
   const departments = Object.keys(labs_by_department);
 
-
   return (
     <TableContainer component={Paper}>
       <Table stickyHeader size="small"  padding={ matches ? "normal" : "none" } sx={{ minWidth: 400 }}>
         <TableHead>
           <TableRow>
             {matches && (
-              <StyledTableCell align="center" colSpan={3}>
+              <StyledTableCell align="center" colSpan={4}>
                 研究室
               </StyledTableCell>
             )}
@@ -85,9 +79,10 @@ export const SurveyTable = ({
           <TableRow>
             {matches && (
               <>
-                <StyledTableCell align="left">専攻</StyledTableCell>
-                <StyledTableCell align="left">分野</StyledTableCell>
-                <StyledTableCell align="left">教員</StyledTableCell>
+                <StyledTableCell align="center">専攻</StyledTableCell>
+                <StyledTableCell align="center">分野</StyledTableCell>
+                <StyledTableCell align="center">教員</StyledTableCell>
+                <StyledTableCell align="center">GPA</StyledTableCell>
               </>
             )}
             {Array.from(Array(max_request).keys()).map((i) => (
@@ -104,7 +99,7 @@ export const SurveyTable = ({
               <StyledTableCell
                 component="th"
                 scope="row"
-                colSpan={matches ? max_request + 4 : max_request + 1}
+                colSpan={matches ? max_request + 5 : max_request + 1}
                 sx={{ backgroundColor: "#a9a9a9" }}
               >
                 <Typography
@@ -118,6 +113,10 @@ export const SurveyTable = ({
               </StyledTableCell>
             </StyledTableRow>
             {labs_by_department[department]
+              .sort((a: Laboratory, b: Laboratory) => {
+                if (a.id < b.id) return -1;
+                return 1;
+              })
               .sort((a: Laboratory, b: Laboratory) => {
                 if (a.field > b.field) return -1;
                 return 1;
