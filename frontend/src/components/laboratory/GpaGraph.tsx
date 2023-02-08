@@ -84,7 +84,7 @@ export const GpaGraph = ({ gpas, max_request }: GpaGraphProps) => {
           gpas.filter((e) => 4.0 <= e && e < 4.3).length,
         ],
         backgroundColor: [
-          `rgba(${-25 + 25 * rank}, ${115 + 13 * rank}, 255, 0.5)`,
+          `rgba(${-30 + 30 * rank}, ${70 + 25 * rank}, 255, 0.75)`,
         ],
         borderColor: [`rgb(${-25 + 25 * rank}, ${115 + 13 * rank}, 255)`],
         borderWidth: 1,
