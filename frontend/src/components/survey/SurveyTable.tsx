@@ -119,6 +119,10 @@ export const SurveyTable = ({
             </StyledTableRow>
             {labs_by_department[department]
               .sort((a: Laboratory, b: Laboratory) => {
+                if (a.id < b.id) return -1;
+                return 1;
+              })
+              .sort((a: Laboratory, b: Laboratory) => {
                 if (a.field > b.field) return -1;
                 return 1;
               })
