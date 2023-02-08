@@ -84,26 +84,27 @@ export default function Home() {
       <Head>
         <title>KUlabMatch | HOME</title>
       </Head>
-      <Grid container>
+      <Grid container justifyContent="center">
         <Grid item xs={9} md={11}>
           <Typography variant={ matches ? "h4" : "h6" } align="center" sx={{ p: 1 }}>
             {survey ? survey.name : ""}(投票者数: {voterCount})
           </Typography>
         </Grid>
-        <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
-          {user && (
+        {user && (
+          <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
             <VoteButton
               user={user}
               survey={survey}
               isVoting={isVoting}
+              isLoading={isLoading}
               setIsVoting={setIsVoting}
               selectedLabIds={selectedLabIds}
               votedLabIds={votedLabIds}
               setVotedLabIds={setVotedLabIds}
               setLaboratories={setLaboratories}
             />
-          )}
-        </Grid>
+          </Grid>
+        )}
       </Grid>
       {survey && (
         <SurveyTable

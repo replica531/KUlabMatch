@@ -6,12 +6,13 @@ import { User } from "@/resources/types";
 import { Survey } from "@/resources/types";
 import { useState } from "react";
 import Alert from "@mui/material/Alert";
-import { Snackbar } from "@mui/material";
+import { CircularProgress, Snackbar } from "@mui/material";
 
 export type VoteButtonProps = {
   user: User;
   survey: Survey | null;
   isVoting: boolean;
+  isLoading: boolean;
   setIsVoting: React.Dispatch<React.SetStateAction<boolean>>;
   selectedLabIds: { rank: number; labId: number }[];
   votedLabIds: { rank: number; labId: number }[];
@@ -25,6 +26,7 @@ export const VoteButton = ({
   user,
   survey,
   isVoting,
+  isLoading,
   setIsVoting,
   selectedLabIds,
   votedLabIds,
@@ -96,7 +98,14 @@ export const VoteButton = ({
       permissionAlertOpen();
     }
   }
-
+  if(isLoading){
+    <Button
+      variant="contained"
+      sx={{ color: "#ffffff" }}
+    >
+      <CircularProgress size={24} />
+    </Button>
+  }
   if (isVoting) {
     return (
       <>
