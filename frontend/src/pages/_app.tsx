@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 const auth0Options: Auth0ProviderOptions = {
   domain: process.env.NEXT_PUBLIC_AUTH0_DOMAIN!,
   clientId: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID!,
-  redirectUri: `${process.env["NEXT_PUBLIC_BASE_URL"]}/surveys`,
+  redirectUri: `${process.env["NEXT_PUBLIC_BASE_URL"]}`,
   audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE!,
   cacheLocation: 'localstorage',
   useRefreshTokens: true,
