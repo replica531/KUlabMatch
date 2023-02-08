@@ -2,8 +2,12 @@ import * as React from "react";
 import { Laboratory } from "@/resources/types";
 import Grid from "@mui/material/Grid";
 import { SurveyTableVoteCell } from "@/components/survey/SurveyTableVoteCell";
-import { StyledTableRow, StyledTableCell } from "@/components/survey/SurveyTable";
-import { Typography } from "@mui/material";
+import {
+  StyledTableRow,
+  StyledTableCell,
+} from "@/components/survey/SurveyTable";
+import { Button, Typography } from "@mui/material";
+import { GpaButton } from "@/components/survey/GpaButton";
 
 
 export type SurveyTableLabRowProps = {
@@ -19,7 +23,6 @@ export type SurveyTableLabRowProps = {
   setVotedLabIds?: React.Dispatch<
     React.SetStateAction<{ rank: number; labId: number }[]>
   >;
-
 };
 
 export const SurveyTableLabRow = ({
@@ -33,7 +36,7 @@ export const SurveyTableLabRow = ({
 }: SurveyTableLabRowProps) => {
   return (
     <>
-      { matches ? (
+      {matches ? (
         <StyledTableRow>
           <StyledTableCell align="left">{laboratory.field}</StyledTableCell>
           <StyledTableCell align="left">{laboratory.major}</StyledTableCell>
@@ -45,6 +48,9 @@ export const SurveyTableLabRow = ({
                 </Grid>
               ))}
             </Grid>
+          </StyledTableCell>
+          <StyledTableCell align="left">
+            <GpaButton labId={laboratory.id} />
           </StyledTableCell>
           {Array.from(Array(max_request).keys()).map((i) => (
             <SurveyTableVoteCell
@@ -67,9 +73,13 @@ export const SurveyTableLabRow = ({
       ) : (
         <>
           <StyledTableRow>
-            <StyledTableCell align="left" colSpan={(max_request+1)/3}>{laboratory.field}</StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request+2)/3}>{laboratory.major}</StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request+3)/3}>
+            <StyledTableCell align="left" colSpan={(max_request) / 3}>
+              {laboratory.field}
+            </StyledTableCell>
+            <StyledTableCell align="left" colSpan={(max_request + 1) / 3}>
+              {laboratory.major}
+            </StyledTableCell>
+            <StyledTableCell align="left" colSpan={(max_request + 2) / 3}>
               <Grid container>
                 {laboratory.teachers.map((teacher, i) => (
                   <Grid key={i} item xs={12}>
@@ -77,6 +87,9 @@ export const SurveyTableLabRow = ({
                   </Grid>
                 ))}
               </Grid>
+            </StyledTableCell>
+            <StyledTableCell align="center" colSpan={1} sx={{ p: 1 }}>
+              <GpaButton labId={laboratory.id} />
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
@@ -95,10 +108,7 @@ export const SurveyTableLabRow = ({
               />
             ))}
             <StyledTableCell align="center">
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: "bold" }}
-              >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                 {laboratory.users.length}
               </Typography>
             </StyledTableCell>
@@ -106,5 +116,5 @@ export const SurveyTableLabRow = ({
         </>
       )}
     </>
-  )
-}
+  );
+};
