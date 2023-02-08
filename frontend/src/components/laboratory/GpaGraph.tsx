@@ -70,7 +70,7 @@ export const GpaGraph = ({ gpas, max_request }: GpaGraphProps) => {
     datasets: ranks.map((rank) => {
       const gpas = gpas_by_rank[rank] ? gpas_by_rank[rank].map((gpa_by_rank) => gpa_by_rank.gpa) : [];
       return {
-        label: `${rank}希望`,
+        label: `第${rank}希望`,
         data: [
           gpas.filter((e) => e == null).length,
           gpas.filter((e) => e < 1.0).length,
