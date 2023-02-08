@@ -69,7 +69,7 @@ export const UserIconButton = ({
             <Typography textAlign="center">プロフィール</Typography>
           </MenuItem>
         </Link>
-        <Link href="/surveys" color="black" underline="none">
+        <Link href="/" color="black" underline="none">
           <MenuItem onClick={handleCloseUserMenu}>
             <HowToVoteIcon />
             <Typography textAlign="center">投票ページ</Typography>

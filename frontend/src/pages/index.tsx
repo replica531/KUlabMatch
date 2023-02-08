@@ -2,27 +2,45 @@ import Head from 'next/head'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from 'react';
 import { useApiAgent } from '@/utils/api_agent';
-import { Laboratory } from '@/resources/types';
+import { Laboratory, User } from '@/resources/types';
 import { SurveyTable } from '@/components/survey/SurveyTable';
 import { Survey } from '@/resources/types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/router';
-import Button from '@mui/material/Button';
+import { VoteButton } from '@/components/survey/VoteButton';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { initialSurveyName } from "@/resources/constants";
 
 export default function Home() {
-  const { isAuthenticated } = useAuth0();
   const apiAgent = useApiAgent();
-  const router = useRouter();
+  const { isLoading, isAuthenticated } = useAuth0();
+  const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
-  const [surveyName, setSurveyName] =
-    useState<string>(initialSurveyName);
+  const [surveyName, setSurveyName] = useState<string>(initialSurveyName);
+  const [isVoting, setIsVoting] = useState<boolean>(false);
   const [laboratories, setLaboratories] = useState<Laboratory[]>([])
   const [voterCount, setVoterCount] = useState<number>(0);
+  const [selectedLabIds, setSelectedLabIds] = useState<
+    { rank: number; labId: number }[]
+  >([]);
+  const [votedLabIds, setVotedLabIds] = useState<
+    { rank: number; labId: number }[]
+  >([]);
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
+
+  const fetchUser = async () => {
+    apiAgent({
+      url: `/api/users/new`,
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setUser(json.user);
+        setSelectedLabIds(json.votedLabIds);
+        setVotedLabIds(json.votedLabIds);
+      });
+  };
 
   const fetchSurvey = async () => {
     const data = { name: surveyName };
@@ -51,7 +69,15 @@ export default function Home() {
 
   useEffect(() => {
     fetchSurvey();
-  }, []);
+
+    if(isAuthenticated){
+      fetchUser();
+    }
+  }, [isAuthenticated]);
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
 
   return (
     <>
@@ -65,28 +91,32 @@ export default function Home() {
           </Typography>
         </Grid>
         <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
-          {isAuthenticated &&
-            <Button
-              onClick={() => {
-                router.push("/surveys");
-              }}
-              variant="contained"
-              sx={{ color: "#ffffff" }}
-            >
-              投票へ
-            </Button>
-          }
+          {user && (
+            <VoteButton
+              user={user}
+              survey={survey}
+              isVoting={isVoting}
+              setIsVoting={setIsVoting}
+              selectedLabIds={selectedLabIds}
+              votedLabIds={votedLabIds}
+              setVotedLabIds={setVotedLabIds}
+              setLaboratories={setLaboratories}
+            />
+          )}
         </Grid>
       </Grid>
-      <SurveyTable
-        max_request={7}
-        laboratories={laboratories}
-        isVoting={false}
-        matches={matches}
-        selectedLabIds={[]}
-        setSelectedLabIds={() => {}}
-        votedLabIds={[]}
-      />
+      {survey && (
+        <SurveyTable
+          max_request={survey.max_request}
+          laboratories={laboratories}
+          isVoting={isVoting}
+          matches={matches}
+          selectedLabIds={selectedLabIds}
+          setSelectedLabIds={setSelectedLabIds}
+          votedLabIds={votedLabIds}
+          setVotedLabIds={setVotedLabIds}
+        />
+      )}
     </>
   )
 }
