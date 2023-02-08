@@ -10,18 +10,9 @@ import { useLayoutEffect, useState } from "react";
 import { User } from "../resources/types";
 import { Grades, Affiliations } from "../resources/constants";
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { forwardRef } from 'react';
+import Alert from '@mui/material/Alert';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 
 export default function ProfilePage() {
   const apiAgent = useApiAgent();
@@ -29,15 +20,24 @@ export default function ProfilePage() {
   const [affiliation, setAffiliation] = useState<number | null>(null);
   const [grade, setGrade] = useState<number | null>(null);
   const [gpa, setGpa] = useState<number | null>(null);
-  const [open, setOpen] = useState(false);
+  const [isSuccessOpen, setSuccessOpen] = useState(false);
+  const [isErrorOpen, setErrorOpen] = useState(false);
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
-  const handleClick = () => {
-    setOpen(true);
+  const successOpen = () => {
+    setSuccessOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const successClose = () => {
+    setSuccessOpen(false);
+  };
+
+  const errorOpen = () => {
+    setErrorOpen(true);
+  };
+
+  const errorClose = () => {
+    setErrorOpen(false);
   };
 
   const fetchUser = async () => {
@@ -74,7 +74,12 @@ export default function ProfilePage() {
     })
       .then((response) => response.json())
       .then((json) => {
-        handleClick()
+        if(json.api_status == "ok"){
+          successOpen()
+        }
+        else{
+          errorOpen()
+        }
       });
   };
 
@@ -139,6 +144,9 @@ export default function ProfilePage() {
                   onChange = {(e) => setGpa(Number(e.target.value))}
                 />
               }
+              <Typography variant="caption" display="block" color="gray" gutterBottom>
+                ※このサービスは京都大学本部とは一切関係ありません。集計結果は参考程度にご利用ください。
+              </Typography>
               <CardActions>
                 {user &&
                   <Button
@@ -154,9 +162,14 @@ export default function ProfilePage() {
           </Grid>
         </CardContent>
       </Card>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+      <Snackbar open={isSuccessOpen} autoHideDuration={4000} onClose={successClose}>
+        <Alert onClose={successClose} severity="success" sx={{ width: '100%' }}>
           正常に保存されました
+        </Alert>
+      </Snackbar>
+      <Snackbar open={isErrorOpen} autoHideDuration={4000} onClose={errorClose}>
+        <Alert onClose={errorClose} severity="error" sx={{ width: '100%' }}>
+          保存に失敗しました
         </Alert>
       </Snackbar>
     </>
