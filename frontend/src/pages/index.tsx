@@ -1,27 +1,28 @@
-import Head from 'next/head'
+import Head from "next/head";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from 'react';
-import { useApiAgent } from '@/utils/api_agent';
-import { Laboratory, User } from '@/resources/types';
-import { SurveyTable } from '@/components/survey/SurveyTable';
-import { Survey } from '@/resources/types';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { VoteButton } from '@/components/survey/VoteButton';
+import { useEffect, useState } from "react";
+import { useApiAgent } from "@/utils/api_agent";
+import { Laboratory, User } from "@/resources/types";
+import { SurveyTable } from "@/components/survey/SurveyTable";
+import { Survey } from "@/resources/types";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { VoteButton } from "@/components/survey/VoteButton";
+import { TopAlert } from "@/components/auth/HomeAlert";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { initialSurveyName } from "@/resources/constants";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import { useRouter } from "next/router";
 
 export default function Home() {
   const apiAgent = useApiAgent();
+  const router = useRouter();
   const { isLoading, isAuthenticated } = useAuth0();
   const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] = useState<string>(initialSurveyName);
   const [isVoting, setIsVoting] = useState<boolean>(false);
-  const [laboratories, setLaboratories] = useState<Laboratory[]>([])
+  const [laboratories, setLaboratories] = useState<Laboratory[]>([]);
   const [voterCount, setVoterCount] = useState<number>(0);
   const [selectedLabIds, setSelectedLabIds] = useState<
     { rank: number; labId: number }[]
@@ -29,7 +30,17 @@ export default function Home() {
   const [votedLabIds, setVotedLabIds] = useState<
     { rank: number; labId: number }[]
   >([]);
+  const [error, setError] = useState<string | null>(null);
+  const [errorDescription, setErrorDescription] = useState<string | null>(null);
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
+
+  const query = router.query;
+  useEffect(() => {
+    if (router.isReady) {
+      setError(query.error as string);
+      setErrorDescription(query.error_description as string);
+    }
+  }, [query, router]);
 
   const fetchUser = async () => {
     apiAgent({
@@ -72,13 +83,13 @@ export default function Home() {
   useEffect(() => {
     fetchSurvey();
 
-    if(isAuthenticated){
+    if (isAuthenticated) {
       fetchUser();
     }
   }, [isAuthenticated]);
 
-  if(isLoading){
-    return <div>Loading...</div>
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -87,18 +98,27 @@ export default function Home() {
         <title>KUlabMatch | HOME</title>
       </Head>
       <Grid container justifyContent="center">
-        <Alert severity="warning">
-          <AlertTitle>メンテナンス中</AlertTitle>
-          大学メールアドレスでの認証を必要とするようにするアップデートの準備中のため、ログインが突然できなくなる可能性があります。
-          ご了承ください。
-        </Alert>
+        <TopAlert
+          isAuthenticated={isAuthenticated}
+          error={error}
+          errorDescription={errorDescription}
+        />
         <Grid item xs={9} md={11}>
-          <Typography variant={ matches ? "h4" : "h6" } align="center" sx={{ p: 1 }}>
+          <Typography
+            variant={matches ? "h4" : "h6"}
+            align="center"
+            sx={{ p: 1 }}
+          >
             {survey ? survey.name : ""}(投票者数: {voterCount})
           </Typography>
         </Grid>
         {user && (
-          <Grid item xs={3} md={1} sx={{ display: "flex", alignItems: "center" }}>
+          <Grid
+            item
+            xs={3}
+            md={1}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
             <VoteButton
               user={user}
               survey={survey}
@@ -126,5 +146,5 @@ export default function Home() {
         />
       )}
     </>
-  )
+  );
 }
