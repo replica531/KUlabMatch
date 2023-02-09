@@ -33,7 +33,7 @@ export default function Header() {
               isAuthenticated={auth0.isAuthenticated}
               isLoading={auth0.isLoading}
               imageUrl={"https://picsum.photos/300/200"}
-              onLogout={() => auth0.logout()}
+              onLogout={() => auth0.logout({ returnTo: window.location.origin })}
             />
           ) : (
             <AuthButton
