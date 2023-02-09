@@ -11,6 +11,8 @@ import { VoteButton } from '@/components/survey/VoteButton';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { initialSurveyName } from "@/resources/constants";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 export default function Home() {
   const apiAgent = useApiAgent();
@@ -85,6 +87,11 @@ export default function Home() {
         <title>KUlabMatch | HOME</title>
       </Head>
       <Grid container justifyContent="center">
+        <Alert severity="warning">
+          <AlertTitle>メンテナンス中</AlertTitle>
+          大学メールアドレスでの認証を必要とするようにするアップデートの準備中のため、ログインが突然できなくなる可能性があります。
+          ご了承ください。
+        </Alert>
         <Grid item xs={9} md={11}>
           <Typography variant={ matches ? "h4" : "h6" } align="center" sx={{ p: 1 }}>
             {survey ? survey.name : ""}(投票者数: {voterCount})
