@@ -52,7 +52,7 @@ export const VoteButton = ({
   };
 
   const onVote = () => {
-    if(selectedLabIds.filter((v) => v.rank === 1).length === 0) {
+    if(selectedLabIds.filter((v) => v.rank === 1).length === 0 && selectedLabIds.length !== 0) {
       voteAlertOpen();
       return;
     }
