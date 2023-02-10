@@ -19,7 +19,7 @@ export default function Header() {
         sx={{ px: { xs: 4, md: 32, xl: 64 } }}
       >
         <Toolbar>
-          <Link href="/surveys" color="black" underline="none">
+          <Link href="/" color="black" underline="none">
             <ScienceIcon
               color="primary"
               sx={{ mr: 1 }}
