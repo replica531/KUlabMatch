@@ -75,7 +75,7 @@ export const GpaGraph = ({ gpas, max_request }: GpaGraphProps) => {
         label: `第${rank}希望`,
         data: [
           gpas.filter((e) => e == null).length,
-          gpas.filter((e) => e < 1.0).length,
+          gpas.filter((e) => e != null && e < 1.0).length,
           gpas.filter((e) => 1.0 <= e && e < 2.0).length,
           gpas.filter((e) => 2.0 <= e && e < 2.5).length,
           gpas.filter((e) => 2.5 <= e && e < 3.0).length,
