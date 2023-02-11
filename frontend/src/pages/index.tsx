@@ -100,7 +100,7 @@ export default function Home() {
       <Grid container justifyContent="center">
         <HomeAlert
           isAuthenticated={isAuthenticated}
-          vote_count={Number(user?.laboratories?.length) | 0}
+          votedCount={votedLabIds.length | 0}
           error={error}
           errorDescription={errorDescription}
         />

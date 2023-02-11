@@ -4,14 +4,14 @@ import Grid from "@mui/material/Grid";
 
 export type AuthButtonProps = {
   isAuthenticated: boolean;
-  vote_count: number | undefined;
+  votedCount: number | undefined;
   error: string | null;
   errorDescription: string | null;
 };
 
 export const HomeAlert = ({
   isAuthenticated,
-  vote_count,
+  votedCount,
   error,
   errorDescription,
 }: AuthButtonProps) => {
@@ -28,7 +28,7 @@ export const HomeAlert = ({
         </Grid>
       )}
       {isAuthenticated &&
-        vote_count == 0 &&
+        votedCount == 0 &&
         (
         <Grid item xs={12}>
           <Alert severity="info">
