@@ -4,12 +4,14 @@ import Grid from "@mui/material/Grid";
 
 export type AuthButtonProps = {
   isAuthenticated: boolean;
+  vote_count: number | undefined;
   error: string | null;
   errorDescription: string | null;
 };
 
-export const TopAlert = ({
+export const HomeAlert = ({
   isAuthenticated,
+  vote_count,
   error,
   errorDescription,
 }: AuthButtonProps) => {
@@ -22,6 +24,22 @@ export const TopAlert = ({
             アカウント登録に京都大学メールアドレスを必要とするようになりました。
             既に登録済みの方も、再度登録をお願いいたします。
             {errorDescription}
+          </Alert>
+        </Grid>
+      )}
+      {isAuthenticated &&
+        vote_count == 0 &&
+        (
+        <Grid item xs={12}>
+          <Alert severity="info">
+            <AlertTitle>投票方法</AlertTitle>
+            1. プロフィール画面で所属と学年を選んでください
+            <br />
+            2. 投票画面で「選択」ボタンを押してください
+            <br />
+            3. 希望する研究室を選んでください
+            <br />
+            4.「投票」ボタンを押してください
           </Alert>
         </Grid>
       )}

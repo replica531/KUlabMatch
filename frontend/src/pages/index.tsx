@@ -8,7 +8,7 @@ import { Survey } from "@/resources/types";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { VoteButton } from "@/components/survey/VoteButton";
-import { TopAlert } from "@/components/auth/HomeAlert";
+import { HomeAlert } from "@/components/auth/HomeAlert";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { initialSurveyName } from "@/resources/constants";
@@ -98,8 +98,9 @@ export default function Home() {
         <title>KUlabMatch | HOME</title>
       </Head>
       <Grid container justifyContent="center">
-        <TopAlert
+        <HomeAlert
           isAuthenticated={isAuthenticated}
+          vote_count={Number(user?.laboratories?.length) | 0}
           error={error}
           errorDescription={errorDescription}
         />
