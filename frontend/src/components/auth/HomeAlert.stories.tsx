@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { TopAlert } from "./HomeAlert";
+import { HomeAlert } from "./HomeAlert";
 
 export default {
-  component: TopAlert,
-} as ComponentMeta<typeof TopAlert>;
+  component: HomeAlert,
+} as ComponentMeta<typeof HomeAlert>;
 
-export const Loading: ComponentStoryObj<typeof TopAlert> = {
+export const Loading: ComponentStoryObj<typeof HomeAlert> = {
 };
