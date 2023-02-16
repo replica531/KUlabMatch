@@ -75,11 +75,11 @@ export const SurveyTableLabRow = ({
         <>
           <StyledTableRow>
             <StyledTableCell align="left" colSpan={(max_request) / 2}>
-              {laboratory.field}専攻
-              <br />
-              {laboratory.course}講座
-              <br />
-              {laboratory.major}分野
+                {laboratory.field}専攻
+                <br />
+                {laboratory.course}講座
+                <br />
+                {laboratory.major && `${laboratory.major}分野`}
             </StyledTableCell>
             <StyledTableCell align="left" colSpan={(max_request + 1) / 2}>
               <Grid container>
