@@ -74,16 +74,14 @@ export const SurveyTableLabRow = ({
       ) : (
         <>
           <StyledTableRow>
-            <StyledTableCell align="left" colSpan={(max_request) / 4}>
-              {laboratory.field}
+            <StyledTableCell align="left" colSpan={(max_request) / 2}>
+              {laboratory.field}専攻
+              <br />
+              {laboratory.course}講座
+              <br />
+              {laboratory.major}分野
             </StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request + 1) / 4}>
-              {laboratory.course}
-            </StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request + 2) / 4}>
-              {laboratory.major}
-            </StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request + 3) / 4}>
+            <StyledTableCell align="left" colSpan={(max_request + 1) / 2}>
               <Grid container>
                 {laboratory.teachers.map((teacher, i) => (
                   <Grid key={i} item xs={12}>
