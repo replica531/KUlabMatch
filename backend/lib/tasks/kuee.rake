@@ -81,12 +81,12 @@ namespace :kuee do
     laboratory.teachers.create(name: '石井 良太', position: '助教')
     laboratory.teachers.create(name: '松田祥伸', position: '特定助教')
     laboratory = survey.laboratories.create(university: '京都大学', department: '工学研究科', field: '電子工学',
-                                            course: '電子機能工学', major: '光量子電子工学', order: 18)
+                                            course: '量子機能工学', major: '光量子電子工学', order: 18)
     laboratory.teachers.create(name: '野田 進', position: '教授')
     laboratory.teachers.create(name: '浅野 卓', position: '准教授')
     laboratory.teachers.create(name: '吉田 昌宏', position: '助教')
     laboratory = survey.laboratories.create(university: '京都大学', department: '工学研究科', field: '電子工学',
-                                            course: '電子機能工学', major: '量子電磁工学', order: 19)
+                                            course: '量子機能工学', major: '量子電磁工学', order: 19)
     laboratory.teachers.create(name: '杉山 和彦', position: '准教授')
     laboratory.teachers.create(name: '中西 俊博', position: '講師')
     laboratory = survey.laboratories.create(university: '京都大学', department: '工学研究科', field: '電子工学',
