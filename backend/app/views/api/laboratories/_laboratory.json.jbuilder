@@ -1,1 +1,1 @@
-json.extract! laboratory, :id, :department, :field, :major
+json.extract! laboratory, :id, :department, :course, :field, :major, :order

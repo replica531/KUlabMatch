@@ -18,8 +18,10 @@ export interface Laboratory {
   id: number;
   university: string;
   department: string;
+  course: string;
   field: string;
   major: string;
+  order: number;
   teachers: Teacher[];
   users: LaboratoryUser[];
 }

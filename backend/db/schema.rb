@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_206_103_043) do
+ActiveRecord::Schema[7.0].define(version: 20_230_216_035_335) do
   create_table 'laboratories', force: :cascade do |t|
     t.string 'university'
     t.string 'department'
@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 20_230_206_103_043) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.integer 'survey_id', null: false
+    t.string 'course'
+    t.integer 'order'
     t.index ['survey_id'], name: 'index_laboratories_on_survey_id'
   end
 

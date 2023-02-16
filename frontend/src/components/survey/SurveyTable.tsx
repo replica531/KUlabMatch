@@ -67,7 +67,7 @@ export const SurveyTable = ({
         <TableHead>
           <TableRow>
             {matches && (
-              <StyledTableCell align="center" colSpan={4}>
+              <StyledTableCell align="center" colSpan={5}>
                 研究室
               </StyledTableCell>
             )}
@@ -80,6 +80,7 @@ export const SurveyTable = ({
             {matches && (
               <>
                 <StyledTableCell align="center">専攻</StyledTableCell>
+                <StyledTableCell align="center">講座</StyledTableCell>
                 <StyledTableCell align="center">分野</StyledTableCell>
                 <StyledTableCell align="center">教員</StyledTableCell>
                 <StyledTableCell align="center">GPA</StyledTableCell>
@@ -99,7 +100,7 @@ export const SurveyTable = ({
               <StyledTableCell
                 component="th"
                 scope="row"
-                colSpan={matches ? max_request + 5 : max_request + 1}
+                colSpan={matches ? max_request + 6 : max_request + 1}
                 sx={{ backgroundColor: "#a9a9a9" }}
               >
                 <Typography
@@ -114,11 +115,7 @@ export const SurveyTable = ({
             </StyledTableRow>
             {labs_by_department[department]
               .sort((a: Laboratory, b: Laboratory) => {
-                if (a.id < b.id) return -1;
-                return 1;
-              })
-              .sort((a: Laboratory, b: Laboratory) => {
-                if (a.field > b.field) return -1;
+                if (a.order < b.order) return -1;
                 return 1;
               })
               .map((laboratory) => (

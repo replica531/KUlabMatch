@@ -39,6 +39,7 @@ export const SurveyTableLabRow = ({
       {matches ? (
         <StyledTableRow>
           <StyledTableCell align="left">{laboratory.field}</StyledTableCell>
+          <StyledTableCell align="left">{laboratory.course}</StyledTableCell>
           <StyledTableCell align="left">{laboratory.major}</StyledTableCell>
           <StyledTableCell align="left">
             <Grid container>
@@ -73,13 +74,16 @@ export const SurveyTableLabRow = ({
       ) : (
         <>
           <StyledTableRow>
-            <StyledTableCell align="left" colSpan={(max_request) / 3}>
+            <StyledTableCell align="left" colSpan={(max_request) / 4}>
               {laboratory.field}
             </StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request + 1) / 3}>
+            <StyledTableCell align="left" colSpan={(max_request + 1) / 4}>
+              {laboratory.course}
+            </StyledTableCell>
+            <StyledTableCell align="left" colSpan={(max_request + 2) / 4}>
               {laboratory.major}
             </StyledTableCell>
-            <StyledTableCell align="left" colSpan={(max_request + 2) / 3}>
+            <StyledTableCell align="left" colSpan={(max_request + 3) / 4}>
               <Grid container>
                 {laboratory.teachers.map((teacher, i) => (
                   <Grid key={i} item xs={12}>
