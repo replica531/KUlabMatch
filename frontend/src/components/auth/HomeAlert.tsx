@@ -22,7 +22,7 @@ export const HomeAlert = ({
           <Alert severity="warning">
             <AlertTitle>お知らせ</AlertTitle>
             アカウント登録に京都大学メールアドレスを必要とするようになりました。
-            既に登録済みの方も、再度登録をお願いいたします。
+            既に登録した方も再度、登録・投票をお願いいたします。
             {errorDescription}
           </Alert>
         </Grid>
