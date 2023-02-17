@@ -30,7 +30,7 @@ export const AuthButton = ({
         variant="contained"
         sx={{ color: "#ffffff" }}
       >
-        ログイン
+        はじめる
       </Button>
     );
   }
