@@ -49,7 +49,7 @@ export const GpaButton = ({
           <Alert severity="warning">GPA分布を見るためにはログインが必要です。</Alert>
         </Snackbar>
         <Typography variant="body2" component="div">
-          GPA
+          GPA分布
         </Typography>
       </Button>
     );
@@ -61,7 +61,7 @@ export const GpaButton = ({
       onClick={() => router.push(`/laboratories/${labId}`)}
     >
       <Typography variant="body2" component="div">
-        GPA
+        GPA分布
       </Typography>
     </Button>
   );
