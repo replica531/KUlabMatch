@@ -62,77 +62,79 @@ export const SurveyTable = ({
   const departments = Object.keys(labs_by_department);
 
   return (
-    <TableContainer component={Paper}>
-      <Table stickyHeader size="small"  padding={ matches ? "normal" : "none" } sx={{ minWidth: 400 }}>
-        <TableHead>
-          <TableRow>
-            {matches && (
-              <StyledTableCell align="center" colSpan={5}>
-                研究室
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ height: "85vh" }}>
+        <Table stickyHeader size="small"  padding={ matches ? "normal" : "none" } sx={{ minWidth: 400 }}>
+          <TableHead>
+            <TableRow>
+              {matches && (
+                <StyledTableCell align="center" colSpan={5}>
+                  研究室
+                </StyledTableCell>
+              )}
+              <StyledTableCell align="center" colSpan={max_request}>
+                希望順位
               </StyledTableCell>
-            )}
-            <StyledTableCell align="center" colSpan={max_request}>
-              希望順位
-            </StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-          </TableRow>
-          <TableRow>
-            {matches && (
-              <>
-                <StyledTableCell align="center">専攻</StyledTableCell>
-                <StyledTableCell align="center">講座</StyledTableCell>
-                <StyledTableCell align="center">分野</StyledTableCell>
-                <StyledTableCell align="center">教員</StyledTableCell>
-                <StyledTableCell align="center">GPA分布</StyledTableCell>
-              </>
-            )}
-            {Array.from(Array(max_request).keys()).map((i) => (
-              <StyledTableCell key={i} align="center">
-                {i + 1}
-              </StyledTableCell>
-            ))}
-            <StyledTableCell align="left">総数</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        {departments.map((department, i) => (
-          <TableBody key={i}>
-            <StyledTableRow key={department}>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                colSpan={matches ? max_request + 6 : max_request + 1}
-                sx={{ backgroundColor: "#a9a9a9" }}
-              >
-                <Typography
-                  variant="h6"
-                  component="div"
-                  align="center"
-                  sx={{ fontWeight: "bold" }}
-                >
-                  {department}
-                </Typography>
-              </StyledTableCell>
-            </StyledTableRow>
-            {labs_by_department[department]
-              .sort((a: Laboratory, b: Laboratory) => {
-                if (a.order < b.order) return -1;
-                return 1;
-              })
-              .map((laboratory) => (
-                <SurveyTableLabRow
-                  key={laboratory.id}
-                  max_request={max_request}
-                  laboratory={laboratory}
-                  isVoting={isVoting}
-                  matches={matches}
-                  selectedLabIds={selectedLabIds}
-                  setSelectedLabIds={setSelectedLabIds}
-                  votedLabIds={votedLabIds}
-                />
+              <StyledTableCell></StyledTableCell>
+            </TableRow>
+            <TableRow>
+              {matches && (
+                <>
+                  <StyledTableCell align="center">専攻</StyledTableCell>
+                  <StyledTableCell align="center">講座</StyledTableCell>
+                  <StyledTableCell align="center">分野</StyledTableCell>
+                  <StyledTableCell align="center">教員</StyledTableCell>
+                  <StyledTableCell align="center">GPA分布</StyledTableCell>
+                </>
+              )}
+              {Array.from(Array(max_request).keys()).map((i) => (
+                <StyledTableCell key={i} align="center">
+                  {i + 1}
+                </StyledTableCell>
               ))}
-          </TableBody>
-        ))}
-      </Table>
-    </TableContainer>
+              <StyledTableCell align="center">総数</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          {departments.map((department, i) => (
+            <TableBody key={i}>
+              <StyledTableRow key={department}>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  colSpan={matches ? max_request + 6 : max_request + 1}
+                  sx={{ backgroundColor: "#a9a9a9" }}
+                >
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    align="center"
+                    sx={{ fontWeight: "bold" }}
+                  >
+                    {department}
+                  </Typography>
+                </StyledTableCell>
+              </StyledTableRow>
+              {labs_by_department[department]
+                .sort((a: Laboratory, b: Laboratory) => {
+                  if (a.order < b.order) return -1;
+                  return 1;
+                })
+                .map((laboratory) => (
+                  <SurveyTableLabRow
+                    key={laboratory.id}
+                    max_request={max_request}
+                    laboratory={laboratory}
+                    isVoting={isVoting}
+                    matches={matches}
+                    selectedLabIds={selectedLabIds}
+                    setSelectedLabIds={setSelectedLabIds}
+                    votedLabIds={votedLabIds}
+                  />
+                ))}
+            </TableBody>
+          ))}
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
