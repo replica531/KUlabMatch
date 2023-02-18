@@ -42,7 +42,7 @@ export const UserIconButton = ({
   }
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
+      <Tooltip title="ページメニュー">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <MenuIcon fontSize="large"/>
         </IconButton>

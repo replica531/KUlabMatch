@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Button, CardActions, MenuItem } from "@mui/material";
+import { Breadcrumbs, Button, CardActions, Link, MenuItem } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
@@ -88,6 +88,14 @@ export default function ProfilePage() {
       <Head>
         <title>KUlabMatch | Profile</title>
       </Head>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/">
+          投票ページ
+        </Link>
+        <Link underline="hover" color="text.primary" href="/profile">
+          ユーザー情報設定
+        </Link>
+      </Breadcrumbs>
       <Typography
         variant={ matches ? "h4" : "h6" }
         align="center"

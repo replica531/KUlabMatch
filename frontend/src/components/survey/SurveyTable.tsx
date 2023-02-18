@@ -83,7 +83,7 @@ export const SurveyTable = ({
                 <StyledTableCell align="center">講座</StyledTableCell>
                 <StyledTableCell align="center">分野</StyledTableCell>
                 <StyledTableCell align="center">教員</StyledTableCell>
-                <StyledTableCell align="center">GPA</StyledTableCell>
+                <StyledTableCell align="center">GPA分布</StyledTableCell>
               </>
             )}
             {Array.from(Array(max_request).keys()).map((i) => (

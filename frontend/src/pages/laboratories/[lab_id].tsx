@@ -5,7 +5,7 @@ import { Laboratory } from "@/resources/types";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { useRouter } from "next/router";
-import { Typography } from "@mui/material";
+import { Breadcrumbs, Link, Typography } from "@mui/material";
 import { Teacher } from "@/resources/types";
 import { User } from "@/resources/types";
 import { GpaGraph } from "@/components/laboratory/GpaGraph";
@@ -42,8 +42,16 @@ export default function ProfilePage() {
   return (
     <>
       <Head>
-        <title>KULabMatch | GPA</title>
+        <title>KULabMatch | GPA分布</title>
       </Head>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/">
+          投票ページ
+        </Link>
+        <Link underline="hover" color="text.primary" href={`/laboratories/${lab_id}`}>
+          GPA分布
+        </Link>
+      </Breadcrumbs>
       <Typography variant={matches ? "h4" : "h6"} align="center" gutterBottom>
         {laboratory?.field} {laboratory?.major}
       </Typography>

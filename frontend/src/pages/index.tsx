@@ -13,6 +13,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
 import { initialSurveyName } from "@/resources/constants";
 import { useRouter } from "next/router";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 
 export default function Home() {
   const apiAgent = useApiAgent();
@@ -95,7 +99,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>KUlabMatch | HOME</title>
+        <title>KUlabMatch | 投票ページ</title>
       </Head>
       <Grid container justifyContent="center">
         <HomeAlert
@@ -104,6 +108,13 @@ export default function Home() {
           error={error}
           errorDescription={errorDescription}
         />
+        <Grid item xs={12}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="text.primary" href="/">
+              投票ページ
+            </Link>
+          </Breadcrumbs>
+        </Grid>
         <Grid item xs={9} md={11}>
           <Typography
             variant={matches ? "h4" : "h6"}
@@ -134,7 +145,7 @@ export default function Home() {
           </Grid>
         )}
       </Grid>
-      {survey && (
+      {survey ? (
         <SurveyTable
           max_request={survey.max_request}
           laboratories={laboratories}
@@ -145,6 +156,13 @@ export default function Home() {
           votedLabIds={votedLabIds}
           setVotedLabIds={setVotedLabIds}
         />
+      ) : (
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={true}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
     </>
   );
