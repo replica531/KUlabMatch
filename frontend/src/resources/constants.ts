@@ -1,5 +1,5 @@
 export const initialSurveyName = "京都大学工学部電気電子工学科"
-export const initialSurveyYear = 2024
+export const initialSurveyYear = 2023
 
 export const HOST =
   process.env.NEXT_PUBLIC_NODE_ENV === "development"

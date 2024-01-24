@@ -19,6 +19,7 @@ export default function ProfilePage() {
   const [gpas, setGpas] = useState<{rank: number, gpa: number}[]>([]);
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
   const { lab_id } = router.query;
+  const year = router.query.year as string;
 
   const fetchLaboratory = async () => {
     apiAgent({
@@ -45,10 +46,10 @@ export default function ProfilePage() {
         <title>KULabMatch | GPA分布</title>
       </Head>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+        <Link underline="hover" color="inherit" href={`/${year ? `?year=${year}`: ""}`}>
           投票ページ
         </Link>
-        <Link underline="hover" color="text.primary" href={`/laboratories/${lab_id}`}>
+        <Link underline="hover" color="text.primary" href={`/laboratories/${lab_id}${year ? `?year=${year}`: ""}`}>
           GPA分布
         </Link>
       </Breadcrumbs>

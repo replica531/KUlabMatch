@@ -25,7 +25,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] = useState<string>(initialSurveyName);
-  const [surveyYear, setSurveyYear] = useState<2023 | 2024>(initialSurveyYear);
+  const [surveyYear, setSurveyYear] = useState<Number>(initialSurveyYear);
   const [isVoting, setIsVoting] = useState<boolean>(false);
   const [laboratories, setLaboratories] = useState<Laboratory[]>([]);
   const [voterCount, setVoterCount] = useState<number>(0);
@@ -62,7 +62,7 @@ export default function Home() {
 
   const fetchSurvey = async () => {
     let year = String(surveyYear);
-    if (router.query.year == "2023" || router.query.year == "2024") {
+    if (router.query.year == "2022" || router.query.year == "2023") {
       year = router.query.year as string;
     }
     const data = { name: surveyName, year: year};
@@ -96,7 +96,7 @@ export default function Home() {
     if (isAuthenticated) {
       fetchUser();
     }
-  }, [isAuthenticated, router.isReady]);
+  }, [isAuthenticated, router]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -116,7 +116,7 @@ export default function Home() {
         />
         <Grid item xs={12}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="text.primary" href="/">
+            <Link underline="hover" color="text.primary" href={`/${surveyYear ? `?year=${surveyYear}`: ""}`}>
               投票ページ
             </Link>
           </Breadcrumbs>
@@ -127,7 +127,9 @@ export default function Home() {
             align="center"
             sx={{ p: 1 }}
           >
-            {survey ? `${survey.year}年${survey.name}` : ""}(投票者数: {voterCount})
+            {survey ? survey.name : ""}
+            {matches ? ""　: <br/>}
+            (投票者数: {voterCount})
           </Typography>
         </Grid>
         {user && survey?.active && (

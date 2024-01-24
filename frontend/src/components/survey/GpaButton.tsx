@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export type GpaButtonProps = {
   labId: number;
+  surveyYear: number;
 };
 
 export const GpaButton = ({
@@ -18,6 +19,7 @@ export const GpaButton = ({
   const router = useRouter();
   const {isLoading , isAuthenticated} = useAuth0();
   const [open, setOpen] = useState(false);
+  const surveyYear = router.query.year as string;
 
   const alertOpen = () => {
     setOpen(true);
@@ -58,7 +60,7 @@ export const GpaButton = ({
     <Button
       color="inherit"
       variant="contained"
-      onClick={() => router.push(`/laboratories/${labId}`)}
+      onClick={() => router.push(`/laboratories/${labId}${surveyYear ? `?year=${surveyYear}` : ""}`)}
     >
       <Typography variant="body2" component="div">
         GPA<br />分布

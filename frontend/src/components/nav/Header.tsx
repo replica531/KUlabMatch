@@ -8,9 +8,14 @@ import Link from "@mui/material/Link";
 import { AuthButton } from "@/components/auth/AuthButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserIconButton } from "@/components/auth/UserIconButton";
+import { SurveyYearSelect } from "@/components/survey/SurveyYearSelect";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { theme } from "@/styles/mui";
 
 export default function Header() {
   const auth0 = useAuth0();
+  const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
+
   return (
     <Box sx={{ flexGrow: 1, bgcolor: "white" }}>
       <AppBar
@@ -26,8 +31,11 @@ export default function Header() {
             />
           </Link>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            研究室希望調査
+            研究室
+            {matches ? ""　: <br/>}
+            配属調査
           </Typography>
+          <SurveyYearSelect />
           {auth0.isAuthenticated && !auth0.isLoading ? (
             <UserIconButton
               isAuthenticated={auth0.isAuthenticated}
