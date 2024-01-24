@@ -40,6 +40,11 @@ export default function Home() {
   const matches: boolean = useMediaQuery(() => theme.breakpoints.up("sm"));
 
   const query = router.query;
+
+  const surveyFilteredLabIds = (labIds: { rank: number; labId: number }[], laboratories: Laboratory[]) => {
+    return labIds.filter((v) => laboratories.find((lab) => lab.id === v.labId));
+  }
+
   useEffect(() => {
     if (router.isReady) {
       setError(query.error as string);
@@ -132,7 +137,7 @@ export default function Home() {
             (投票者数: {voterCount})
           </Typography>
         </Grid>
-        {user && survey?.active && (
+        {user && (
           <Grid
             item
             xs={3}
@@ -145,8 +150,8 @@ export default function Home() {
               isVoting={isVoting}
               isLoading={isLoading}
               setIsVoting={setIsVoting}
-              selectedLabIds={selectedLabIds}
-              votedLabIds={votedLabIds}
+              selectedLabIds={surveyFilteredLabIds(selectedLabIds, laboratories)}
+              votedLabIds={surveyFilteredLabIds(votedLabIds, laboratories)}
               setVotedLabIds={setVotedLabIds}
               setLaboratories={setLaboratories}
             />
@@ -159,9 +164,9 @@ export default function Home() {
           laboratories={laboratories}
           isVoting={isVoting}
           matches={matches}
-          selectedLabIds={selectedLabIds}
+          selectedLabIds={surveyFilteredLabIds(selectedLabIds, laboratories)}
           setSelectedLabIds={setSelectedLabIds}
-          votedLabIds={votedLabIds}
+          votedLabIds={surveyFilteredLabIds(votedLabIds, laboratories)}
           setVotedLabIds={setVotedLabIds}
         />
       ) : (

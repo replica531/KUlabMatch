@@ -56,7 +56,6 @@ export const VoteButton = ({
       voteAlertOpen();
       return;
     }
-    console.log(votedLabIds)
     const destroyLabIds = votedLabIds.filter(
       (v) => !selectedLabIds.find((s) => v.labId === s.labId && v.rank === s.rank)
     )
