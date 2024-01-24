@@ -10,6 +10,8 @@ export interface User {
 export interface Survey {
   id: number;
   name: string;
+  year: number;
+  active: boolean;
   max_request: number;
   laboratories: Laboratory[];
 }

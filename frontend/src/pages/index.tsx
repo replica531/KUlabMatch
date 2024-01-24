@@ -11,7 +11,7 @@ import { VoteButton } from "@/components/survey/VoteButton";
 import { HomeAlert } from "@/components/auth/HomeAlert";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "@/styles/mui";
-import { initialSurveyName } from "@/resources/constants";
+import { initialSurveyName, initialSurveyYear } from "@/resources/constants";
 import { useRouter } from "next/router";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -25,6 +25,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [survey, setSurvey] = useState<Survey | null>(null);
   const [surveyName, setSurveyName] = useState<string>(initialSurveyName);
+  const [surveyYear, setSurveyYear] = useState<2023 | 2024>(initialSurveyYear);
   const [isVoting, setIsVoting] = useState<boolean>(false);
   const [laboratories, setLaboratories] = useState<Laboratory[]>([]);
   const [voterCount, setVoterCount] = useState<number>(0);
@@ -60,7 +61,11 @@ export default function Home() {
   };
 
   const fetchSurvey = async () => {
-    const data = { name: surveyName };
+    let year = String(surveyYear);
+    if (router.query.year == "2023" || router.query.year == "2024") {
+      year = router.query.year as string;
+    }
+    const data = { name: surveyName, year: year};
     const query = new URLSearchParams(data).toString();
     apiAgent({
       url: `/api/surveys`,
@@ -85,12 +90,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchSurvey();
-
+    if(router.isReady) {
+      fetchSurvey();
+    }
     if (isAuthenticated) {
       fetchUser();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, router.isReady]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -121,10 +127,10 @@ export default function Home() {
             align="center"
             sx={{ p: 1 }}
           >
-            {survey ? survey.name : ""}(投票者数: {voterCount})
+            {survey ? `${survey.year}年${survey.name}` : ""}(投票者数: {voterCount})
           </Typography>
         </Grid>
-        {user && (
+        {user && survey?.active && (
           <Grid
             item
             xs={3}

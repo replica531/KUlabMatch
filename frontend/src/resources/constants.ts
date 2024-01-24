@@ -1,4 +1,5 @@
-export const initialSurveyName = "京都大学工学部電気電子工学科B3研究室配属"
+export const initialSurveyName = "京都大学工学部電気電子工学科"
+export const initialSurveyYear = 2024
 
 export const HOST =
   process.env.NEXT_PUBLIC_NODE_ENV === "development"
@@ -24,7 +25,7 @@ export const Affiliations = [
 ]
 
 export const VotePermissionLists = [
-  {surveyName: '京都大学工学部電気電子工学科B3研究室配属', permissions: [
+  {surveyName: '京都大学工学部電気電子工学科', permissions: [
     { affiliation: 1, grade: 3 },
   ]}
 ]

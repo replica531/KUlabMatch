@@ -69,10 +69,16 @@ export const UserIconButton = ({
             <Typography textAlign="center">プロフィール</Typography>
           </MenuItem>
         </Link>
-        <Link href="/" color="black" underline="none">
+        <Link href="/?year=2023" color="black" underline="none">
           <MenuItem onClick={handleCloseUserMenu}>
             <HowToVoteIcon />
-            <Typography textAlign="center">投票ページ</Typography>
+            <Typography textAlign="center">2023年</Typography>
+          </MenuItem>
+        </Link>
+        <Link href="/?year=2024" color="black" underline="none">
+          <MenuItem onClick={handleCloseUserMenu}>
+            <HowToVoteIcon />
+            <Typography textAlign="center">2024年</Typography>
           </MenuItem>
         </Link>
         <Divider />
