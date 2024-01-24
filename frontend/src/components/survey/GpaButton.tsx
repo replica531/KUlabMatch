@@ -10,7 +10,6 @@ import { useState } from "react";
 
 export type GpaButtonProps = {
   labId: number;
-  surveyYear: number;
 };
 
 export const GpaButton = ({
