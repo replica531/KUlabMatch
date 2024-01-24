@@ -137,7 +137,7 @@ export default function Home() {
             (投票者数: {voterCount})
           </Typography>
         </Grid>
-        {user && (
+        {user && survey?.active && (
           <Grid
             item
             xs={3}
