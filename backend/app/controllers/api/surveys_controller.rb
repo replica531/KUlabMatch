@@ -4,7 +4,7 @@ class Api::SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
-    @survey = Survey.find_by(name: params[:name])
+    @survey = Survey.find_by(name: params[:name], year: params[:year])
   end
 
   def show

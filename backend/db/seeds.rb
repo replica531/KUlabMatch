@@ -1,4 +1,4 @@
-survey = Survey.create(name: '京都大学工学部電気電子工学科B3研究室配属', max_request: 8)
+survey = Survey.create(name: '京都大学工学部電気電子工学科B3研究室配属', year: 2024, max_request: 8)
 # 工学研究科
 # 電気工学
 laboratory = survey.laboratories.create(university: '京都大学', department: '工学研究科', field: '電気工学',
@@ -111,7 +111,6 @@ laboratory.teachers.create(name: '水谷 圭一', position: '准教授')
 laboratory.teachers.create(name: '香田 優介', position: '助教')
 laboratory = survey.laboratories.create(university: '京都大学', department: '情報学研究科', field: '通信情報システム',
                                         course: '通信システム工学', major: '伝送メディア', order: 24)
-laboratory.teachers.create(name: '山本 高至', position: '准教授')
 laboratory = survey.laboratories.create(university: '京都大学', department: '情報学研究科', field: '通信情報システム',
                                         course: '通信システム工学', major: '知的通信網', order: 25)
 laboratory.teachers.create(name: '大木 英司', position: '教授')
@@ -167,7 +166,7 @@ laboratory.teachers.create(name: '川山 巌', position: '准教授')
 # エネルギー変換科学専攻
 laboratory = survey.laboratories.create(university: '京都大学', department: 'エネルギー科学研究科', field: 'エネルギー変換科学',
                                         course: 'エネルギー機能変換', major: 'プラズマエネルギー変換', order: 36)
-laboratory.teachers.create(name: '長﨑 百伸', position: '教授')
+laboratory.teachers.create(name: '長崎百伸', position: '教授')
 laboratory.teachers.create(name: '小林 進二', position: '准教授')
 # エネルギー基礎科学専攻
 laboratory = survey.laboratories.create(university: '京都大学', department: 'エネルギー科学研究科', field: 'エネルギー基礎科学',
@@ -175,7 +174,6 @@ laboratory = survey.laboratories.create(university: '京都大学', department: 
 laboratory.teachers.create(name: '稲垣 滋', position: '教授')
 laboratory.teachers.create(name: '南 貴司', position: '准教授')
 laboratory.teachers.create(name: '門 信一郎', position: '准教授')
-laboratory.teachers.create(name: '大島 慎介', position: '助教')
 laboratory.teachers.create(name: '金 史良', position: '助教')
 laboratory = survey.laboratories.create(university: '京都大学', department: 'エネルギー科学研究科', field: 'エネルギー基礎科学',
                                         course: '基礎プラズマ科学', major: 'エネルギー光物性', order: 38)
