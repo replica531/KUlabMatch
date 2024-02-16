@@ -13,7 +13,7 @@ export const SurveyYearSelect = ({
   const router = useRouter();
 
   useEffect(() => {
-    if(router.isReady) {
+    if(router.isReady && router.query.year) {
       setSurveyYear(router.query.year as string);
     }
   }, [router.isReady]);

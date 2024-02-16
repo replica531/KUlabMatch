@@ -21,7 +21,7 @@ export default function Header() {
       <AppBar
         color="inherit"
         position="static"
-        sx={{ px: { xs: 4, md: 32, xl: 64 } }}
+        sx={{ px: { xs: 0, md: 32, xl: 64 } }}
       >
         <Toolbar>
           <Link href="/" color="black" underline="none">
