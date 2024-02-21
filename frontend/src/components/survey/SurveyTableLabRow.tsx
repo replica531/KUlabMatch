@@ -43,11 +43,13 @@ export const SurveyTableLabRow = ({
           <StyledTableCell align="left">{laboratory.major}</StyledTableCell>
           <StyledTableCell align="left">
             <Grid container>
-              {laboratory.teachers.map((teacher, i) => (
-                <Grid key={i} item xs={12}>
-                  {teacher.position} : {teacher.name}
-                </Grid>
-              ))}
+            {laboratory.teachers
+            .sort((a, b) => a.order - b.order)
+            .map((teacher, i) => (
+              <Grid key={i} item xs={12}>
+                {teacher.position} : {teacher.name}
+              </Grid>
+            ))}
             </Grid>
           </StyledTableCell>
           <StyledTableCell align="left">

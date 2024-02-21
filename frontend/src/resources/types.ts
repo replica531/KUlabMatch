@@ -32,6 +32,7 @@ export interface Teacher {
   id: number;
   name: string;
   position: string;
+  order: number;
 }
 
 export interface LaboratoryUser {
