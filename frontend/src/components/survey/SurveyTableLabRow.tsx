@@ -85,7 +85,9 @@ export const SurveyTableLabRow = ({
             </StyledTableCell>
             <StyledTableCell align="left" colSpan={(max_request + 1) / 2}>
               <Grid container>
-                {laboratory.teachers.map((teacher, i) => (
+                {laboratory.teachers
+                .sort((a, b) => a.order - b.order)
+                .map((teacher, i) => (
                   <Grid key={i} item xs={12}>
                     {teacher.position} : {teacher.name}
                   </Grid>
