@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.api_status 'ok'
 json.votedLabIds do
   json.array! @voted_lab_ids do |voted_lab_id|

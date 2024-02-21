@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :kuee do
   desc '京大電電研究室配属用のデータを作成する'
   task create_kuee_labs: :environment do

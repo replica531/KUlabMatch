@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorizationService
   def initialize(headers = {})
     @headers = headers

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.api_status 'ok'
 json.surveys do
   json.array! @surveys do |survey|

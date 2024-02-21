@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CsrfsController < ApplicationController
   def show
     render json: {

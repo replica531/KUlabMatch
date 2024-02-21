@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.api_status 'ok'
 json.laboratory @laboratory
 json.max_request @laboratory.survey.max_request

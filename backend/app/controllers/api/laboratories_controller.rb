@@ -1,42 +1,46 @@
-class Api::LaboratoriesController < ApplicationController
-  before_action :set_laboratory, only: %i[show update destroy]
-  before_action :authenticate_request!, only: %i[create update destroy]
+# frozen_string_literal: true
 
-  def index
-    @laboratories = Laboratory.all
-  end
+module Api
+  class LaboratoriesController < ApplicationController
+    before_action :set_laboratory, only: %i[show update destroy]
+    before_action :authenticate_request!, only: %i[create update destroy]
 
-  def show; end
-
-  def create
-    @laboratory = Laboratory.new(laboratory_params)
-
-    if @laboratory.save
-      render :show, status: :created, location: @laboratory
-    else
-      render json: @laboratory.errors, status: :unprocessable_entity
+    def index
+      @laboratories = Laboratory.all
     end
-  end
 
-  def update
-    if @laboratory.update(laboratory_params)
-      render :show, status: :ok, location: @laboratory
-    else
-      render json: @laboratory.errors, status: :unprocessable_entity
+    def show; end
+
+    def create
+      @laboratory = Laboratory.new(laboratory_params)
+
+      if @laboratory.save
+        render :show, status: :created, location: @laboratory
+      else
+        render json: @laboratory.errors, status: :unprocessable_entity
+      end
     end
-  end
 
-  def destroy
-    @laboratory.destroy
-  end
+    def update
+      if @laboratory.update(laboratory_params)
+        render :show, status: :ok, location: @laboratory
+      else
+        render json: @laboratory.errors, status: :unprocessable_entity
+      end
+    end
 
-  private
+    def destroy
+      @laboratory.destroy
+    end
 
-  def set_laboratory
-    @laboratory = Laboratory.find(params[:id])
-  end
+    private
 
-  def laboratory_params
-    params.require(:laboratory).permit(:department, :field, :major)
+    def set_laboratory
+      @laboratory = Laboratory.find(params[:id])
+    end
+
+    def laboratory_params
+      params.require(:laboratory).permit(:department, :field, :major)
+    end
   end
 end

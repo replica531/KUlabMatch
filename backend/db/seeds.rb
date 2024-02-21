@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 survey = Survey.create(name: '京都大学工学部電気電子工学科B3研究室配属', year: 2024, max_request: 8)
 # 工学研究科
 # 電気工学
